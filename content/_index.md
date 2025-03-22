@@ -14,7 +14,7 @@ bio = "programmer, he/him, we are young and life is fun"
 avatar = "img/avatar.webp"
 links = [
     { name = "GitHub", icon = "github", url = "https://github.com/johnmaxrin" },
-    { name = "Twitter", icon = "linkedin", url = "https://twitter.com/<your-username>" },
+    { name = "LinkedIn", icon = "linkedin", url = "https://www.linkedin.com/in/robertksamuel/" },
     { name = "Email", icon = "email", url = "mailto:<60b36t@gmail.com>" },
 ]
 
