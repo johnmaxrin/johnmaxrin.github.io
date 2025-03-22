@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+Allow: /
+Sitemap: https://johnmaxrin.github.io/johnmaxrin/sitemap.xml

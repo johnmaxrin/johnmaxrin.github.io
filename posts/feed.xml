@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title>My Blog</title>
+	<subtitle>My blog site.</subtitle>
+	<link href="https://johnmaxrin.github.io/johnmaxrin/posts/feed.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://johnmaxrin.github.io/johnmaxrin/posts/"/>
+	<updated>2025-03-22T00:00:00+00:00</updated>
+	<id>https://johnmaxrin.github.io/johnmaxrin/posts/feed.xml</id>
+	<entry xml:lang="en">
+		<title>My First Blog Post</title>
+		<published>2025-03-22T00:00:00+00:00</published>
+		<updated>2025-03-22T00:00:00+00:00</updated>
+		<link href="https://johnmaxrin.github.io/johnmaxrin/posts/myfirstpost/" type="text/html"/>
+		<id>https://johnmaxrin.github.io/johnmaxrin/posts/myfirstpost/</id>
+		<content type="html">&lt;p&gt;Welcome to my blog! This is my first post.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+</feed>
