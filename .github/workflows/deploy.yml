@@ -1,4 +1,4 @@
-name: Deploy Zola site to GitHub Pages
+name: github pages
 
 on:
   push:
@@ -6,22 +6,19 @@ on:
       - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
 
-      - name: Install Zola
-        uses: taiki-e/setup-zola@v1 
-
-      - name: Build site
-        run: zola build
-
-      - name: Deploy to GitHub Pages
+      - name: Install and Run Zola
+        run: |
+          sudo snap install --edge zola
+          zola build
+      - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-          publish_branch: gh-pages
-
