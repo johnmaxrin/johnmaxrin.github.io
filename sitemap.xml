@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://johnmaxrin.github.io/johnmaxrin/</loc>
+        <loc>https://johnmaxrin.github.io/</loc>
     </url>
     <url>
-        <loc>https://johnmaxrin.github.io/johnmaxrin/categories/</loc>
+        <loc>https://johnmaxrin.github.io/categories/</loc>
     </url>
     <url>
-        <loc>https://johnmaxrin.github.io/johnmaxrin/posts/</loc>
+        <loc>https://johnmaxrin.github.io/posts/</loc>
     </url>
     <url>
-        <loc>https://johnmaxrin.github.io/johnmaxrin/posts/myfirstpost/</loc>
+        <loc>https://johnmaxrin.github.io/posts/myfirstpost/</loc>
         <lastmod>2025-03-22</lastmod>
     </url>
     <url>
-        <loc>https://johnmaxrin.github.io/johnmaxrin/tags/</loc>
+        <loc>https://johnmaxrin.github.io/tags/</loc>
     </url>
 </urlset>

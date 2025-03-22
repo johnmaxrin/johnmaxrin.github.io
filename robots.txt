@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 Allow: /
-Sitemap: https://johnmaxrin.github.io/johnmaxrin/sitemap.xml
+Sitemap: https://johnmaxrin.github.io/sitemap.xml
