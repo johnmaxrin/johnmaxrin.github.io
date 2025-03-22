@@ -13,10 +13,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install Zola
-        run: |
-          curl -s -L https://github.com/getzola/zola/releases/latest/download/zola-x86_64-unknown-linux-gnu.tar.gz | tar xz
-          chmod +x zola
-          mv zola /usr/local/bin/
+        uses: taiki-e/setup-zola@v1 
 
       - name: Build site
         run: zola build
