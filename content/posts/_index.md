@@ -7,11 +7,12 @@ page_template = "post.html"
 insert_anchor_links = "right"
 generate_feeds = true
 
+
 [extra]
 lang = "en"
 
 title = "Posts"
-subtitle = "I write about ...."
+subtitle = "I write about .... Apple"
 
 date_format = "%b %-d, %Y"
 

@@ -21,11 +21,11 @@ taxonomies = [{ name = "tags" }, { name = "categories" }]
 [markdown]
 highlight_code = true
 highlight_theme = "css"
-#extra_syntaxes_and_themes = ["highlight_themes"]
-#highlight_themes_css = [
-#  { theme = "serene-light", filename = "hl-light.css" },
-#  { theme = "serene-dark", filename = "hl-dark.css" },
-#]
+extra_syntaxes_and_themes = ["highlight_themes"]
+highlight_themes_css = [
+  { theme = "serene-light", filename = "hl-light.css" },
+  { theme = "serene-dark", filename = "hl-dark.css" },
+]
 render_emoji = true
 external_links_target_blank = false
 external_links_no_follow = true
@@ -43,9 +43,12 @@ anchors = "on"
 
 sections = [
   { name = "posts", path = "/posts", is_external = false },
+  { name = "about", path = "/about", is_external = false },
+
   # { name = "tags", path = "/tags", is_external = false },
   # { name = "github", path = "https://github.com/<your-username>", is_external = true },
 ]
+
 blog_section_path = "/posts"
 
 back_link_text = "Back" # Text of the back button
