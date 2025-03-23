@@ -4,6 +4,9 @@
         <loc>https://johnmaxrin.github.io/</loc>
     </url>
     <url>
+        <loc>https://johnmaxrin.github.io/about/</loc>
+    </url>
+    <url>
         <loc>https://johnmaxrin.github.io/categories/</loc>
     </url>
     <url>
@@ -11,6 +14,7 @@
     </url>
     <url>
         <loc>https://johnmaxrin.github.io/posts/arith2llvm/</loc>
+        <lastmod>2025-03-23</lastmod>
     </url>
     <url>
         <loc>https://johnmaxrin.github.io/posts/llvmstructs/</loc>
