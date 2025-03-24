@@ -25,6 +25,6 @@ recent_more_text = "more »"
 date_format = "%b %-d, %Y"
 +++
 
-I am a second-year M.S. student in the Department of Computer Science at IIT Madras, advised by  <a href="https://www.cse.iitm.ac.in/~rupesh/">Prof. Rupesh Nasre </a>. I work on high-performance compilers, code generation for distributed and heterogeneous computing. 
+I am a second-year M.S. student in the Department of Computer Science at IIT Madras, advised by  <a href="https://www.cse.iitm.ac.in/~rupesh/">Prof. Rupesh Nasre </a>. I make writing code for supercomputers simpler and more efficient.
 
-Beyond research, I enjoy <a href="">reading,</a> <a href="">photography,</a> playing the guitar, and solo cycling trips.
+Beyond research, I enjoy <a href="">reading</a> 📚 , <a href="">photography</a> 📷 , playing the guitar 🎸, and solo cycling 🚴.
