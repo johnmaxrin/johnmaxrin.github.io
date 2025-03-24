@@ -10,7 +10,7 @@ footer = false
 # If you don't want to display id/bio/avatar, simply comment out that line
 name = "Robert K Samuel"
 id = "60b36t"
-bio = "Two roads diverged in a wood, and I took the one less traveled by,"
+bio = "Love bears all things, believes all things, hopes all things, endures all things. ❤️"
 avatar = "img/avatar.webp"
 links = [
     { name = "GitHub", icon = "github", url = "https://github.com/johnmaxrin" },
@@ -27,4 +27,4 @@ date_format = "%b %-d, %Y"
 
 I am a second-year M.S. student in the Department of Computer Science at IIT Madras, advised by  <a href="https://www.cse.iitm.ac.in/~rupesh/">Prof. Rupesh Nasre </a>. I work on high-performance compilers, code generation for distributed and heterogeneous computing. 
 
-Beyond research, I enjoy <a href="">reading,</a> <a href="">photography,</a> playing the guitar, and exploring Chennai on solo cycling trips.
+Beyond research, I enjoy <a href="">reading,</a> <a href="">photography,</a> playing the guitar, and solo cycling trips.
