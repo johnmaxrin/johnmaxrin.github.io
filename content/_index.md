@@ -10,7 +10,7 @@ footer = false
 # If you don't want to display id/bio/avatar, simply comment out that line
 name = "Robert K Samuel"
 id = "60b36t"
-bio = "Love bears all things, believes all things, hopes all things, endures all things. ❤️"
+bio = "Love bears all things, believes all things, hopes all things, endures all things."
 avatar = "img/avatar.webp"
 links = [
     { name = "GitHub", icon = "github", url = "https://github.com/johnmaxrin" },
@@ -19,12 +19,15 @@ links = [
 ]
 
 # Show a few recent posts in home page
-recent = false
+recent = true
 recent_max = 15
 recent_more_text = "more »"
 date_format = "%b %-d, %Y"
 +++
 
-I am a second-year M.S. student in the Department of Computer Science at IIT Madras, advised by  <a href="https://www.cse.iitm.ac.in/~rupesh/">Prof. Rupesh Nasre </a>. I make writing code for supercomputers simpler and more efficient. <sup><a href="" > Know More </a> </sup>
+I am a second-year M.S. student in the Department of Computer Science at IIT Madras, advised by  <a href="https://www.cse.iitm.ac.in/~rupesh/">Prof. Rupesh Nasre </a>. I make writing code for supercomputers simpler and more efficient. <sup><a href="" >Know More</a> </sup>
 
-Beyond research, I enjoy <a href="">reading</a> 📚 , <a href="">photography</a> 📷 , playing the guitar 🎸, and solo cycling 🚴.
+Beyond research, I enjoy reading, <a href="">photography</a>, guitar, and solo cycling.
+
+## Education
+{{ collection(file="education.toml") }}
