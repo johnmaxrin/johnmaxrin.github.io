@@ -40,6 +40,11 @@ Now that we have the mapping, the next step is to <strong> emit a graph struct u
 auto int32ty = builder.getI32Type();
 auto structType = LLVM::LLVMStructType::getIdentified(&context, "Graph");
 structType.setBody({LLVM::LLVMPointerType::get(&context), builder.getI32Type()}, false);
+auto graphObj = buidler.create<LLVM::AllocaOp>(loc, ptrType, structType, one);
+```
+This will generate LLVM IR similar to the following.
+```asm
+%1 = llvm.allocate %0 x !llvm.struct<"Graph", (i32)> : (i32) -> !llvm.ptr
 ```
 
 
