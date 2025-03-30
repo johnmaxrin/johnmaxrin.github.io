@@ -27,7 +27,10 @@ date_format = "%b %-d, %Y"
 
 I am a second-year M.S. student in the Department of Computer Science at IIT Madras, advised by  <a href="https://www.cse.iitm.ac.in/~rupesh/">Prof. Rupesh Nasre </a>. I make writing code for supercomputers simpler and more efficient. <sup><a href="" >Know More</a> </sup>
 
-Beyond research, I enjoy reading, <a href="">photography</a>, guitar, and solo cycling.
+Beyond research, I enjoy reading, <a href="">photography</a>, playing guitar, and cycling.
 
 ## Education
 {{ collection(file="education.toml") }}
+
+## Projects
+{{ collection(file="projects.toml") }}
