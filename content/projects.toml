@@ -1,9 +1,9 @@
 [[collection]]
 type = "card"
-icon = "/assets/icon-deepseek.svg"
-title = "DeepSeek"
+icon = "/img/language.png"
+title = "StarPlat MLIR"
 subtitle = "AI Researcher"
-date = "2025-present"
+date = "2025 Jan - Present"
 content = """\
 Work on the DeepSeek project, a research project that aims to develop a new generation of AI models that can understand and generate natural language text.
 
@@ -12,7 +12,7 @@ The project is focused on developing models that can generate text that is coher
 
 [[collection]]
 type = "card"
-icon = "/assets/icon-openai.png"
+icon = "/img/semiconductor.png"
 title = "OpenAI"
 subtitle = "Machine Learning Engineer"
 date = "2021-2025"
@@ -22,10 +22,10 @@ Alone with the team, I worked on developing new machine learning models and algo
 
 [[collection]]
 type = "card"
-icon = "/assets/icon-google.webp"
-title = "Google"
-subtitle = "Backend Engineer"
-date = "2018-2022"
+icon = "/img/gear.png"
+title = "AutoRegex"
+subtitle = "A Regex Engine Inspired by the Dragon Book"
+date = "Sep 2023 - Oct 2023"
 content = """\
-As a backend engineer at Google, I worked on developing and maintaining the backend systems that power Google's search engine, as well as other products and services. I worked on developing new features and improvements for the search engine, as well as on optimizing the performance and scalability of the backend systems.
+A Regex engine that converts regular expressions into deterministic finite automata (DFA) and uses the resulting DFA to match patterns. The algorithm employed in this conversion is based on the well-known "Dragon Book" (Compilers Principles, Techniques and Tool by ALSU).
 """
