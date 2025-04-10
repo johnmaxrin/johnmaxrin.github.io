@@ -48,7 +48,7 @@ First, we need to understand how to deal with arrays in LLVM. We&#x27;ll start s
 </content>
 	</entry>
 	<entry xml:lang="en">
-		<title>My Blog 2</title>
+		<title>Code Transformations and Changing Rooms: An Unexpected Analogy</title>
 		<published>2025-03-23T00:00:00+00:00</published>
 		<updated>2025-03-23T00:00:00+00:00</updated>
 		<link href="https://johnmaxrin.github.io/posts/arith2llvm/" type="text/html"/>
