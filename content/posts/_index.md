@@ -12,7 +12,7 @@ generate_feeds = true
 lang = "en"
 
 title = "Posts"
-subtitle = "I write about .... Apple"
+subtitle = "I write about compilers, MLIR, LLVM, and everything in between — exploring how code transforms from high-level languages to efficient machine-level execution."
 
 date_format = "%b %-d, %Y"
 
