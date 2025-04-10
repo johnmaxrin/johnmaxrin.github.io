@@ -6,4 +6,4 @@ draft = false
 template = "post.html"
 +++
 
-This is my blog content. It should appear in the posts section.
+I'm cooking. 
