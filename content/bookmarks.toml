@@ -4,3 +4,14 @@ icon = "https://jamesbornholt.com/me.jpg"
 link = "https://jamesbornholt.com/blog/memory-models/"
 title = "Memory Consistency Models"
 subtitle = "James Bornholt"
+
+
+[[collection]]
+type = "entry"
+icon = "https://avatars.githubusercontent.com/u/817898?v=4"
+link = "https://github.com/DoctorWkt/acwj"
+title = "A Compiler Writing Journey "
+subtitle = "Warren"
+
+
+
