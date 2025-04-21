@@ -4,8 +4,29 @@
 	<subtitle>My blog site.</subtitle>
 	<link href="https://johnmaxrin.github.io/posts/feed.xml" rel="self" type="application/atom+xml"/>
     <link href="https://johnmaxrin.github.io/posts/"/>
-	<updated>2025-03-28T00:00:00+00:00</updated>
+	<updated>2025-04-21T00:00:00+00:00</updated>
 	<id>https://johnmaxrin.github.io/posts/feed.xml</id>
+	<entry xml:lang="en">
+		<title>Some Stories Remain Unfinished and Eternally Beautiful 🕊️</title>
+		<published>2025-04-21T00:00:00+00:00</published>
+		<updated>2025-04-21T00:00:00+00:00</updated>
+		<link href="https://johnmaxrin.github.io/posts/musings-1/" type="text/html"/>
+		<id>https://johnmaxrin.github.io/posts/musings-1/</id>
+		<content type="html">&lt;p&gt;Today, the world pauses.
+We lost a shepherd, a father, a quiet strength — our beloved Pope has gone home.&lt;&#x2F;p&gt;
+&lt;p&gt;And in this moment, I&#x27;m reminded how some stories… don’t end.
+They simply change form.
+Like a soft candle flickering out, not into darkness, but into something eternal.&lt;&#x2F;p&gt;
+&lt;p&gt;We often seek closure — in people, in relationships, in moments.
+But maybe beauty lies in the unfinished. In the half-spoken goodbyes, in silent prayers, in the gentle presence that lingers even after someone is gone.&lt;&#x2F;p&gt;
+&lt;p&gt;His story may feel like it ended today.
+But the truth is, it lives on — in every soul he inspired, in every heart he helped lift.
+Just as some people leave our lives quietly, not with full stops, but with ellipses…
+Their story lives within us, woven into the very fabric of who we are.&lt;&#x2F;p&gt;
+&lt;p&gt;Some stories remain unfinished.
+And maybe… that’s what makes them eternal.&lt;&#x2F;p&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>Starplat, Graph, MLIR, LLVM &amp; Pointers</title>
 		<published>2025-03-28T00:00:00+00:00</published>
