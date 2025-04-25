@@ -8,7 +8,7 @@ insert_anchor_links = "none"
 lang = 'en'
 
 title = "About"
-subtitle = "I write about ...."
+subtitle = "Manjali · Thuvayoor · Manakala · Adoor · Elthuruth · Patturaikkal · Eastfort · Koovapally · Adyar · 600036"
 
 math = false
 mermaid = false
@@ -19,4 +19,4 @@ reaction = false
 
 I'm Robert K Samuel. I like building things: compilers, hardware, and everything in between. I work on generating efficient code and systems from high-level abstractions using LLVM and MLIR. I have also created several MLIR dialects, some for fun and some for research.
 
-I am interested in problems at the intersection of programming languages, hardware, and performance. I like exploring how far we can push code generation, from software to hardware.
+I am interested in problems at the intersection of programming languages, hardware, and performance. I like exploring how far we can push the art code generation.
