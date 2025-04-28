@@ -10,7 +10,7 @@ footer = false
 # If you don't want to display id/bio/avatar, simply comment out that line
 name = "Robert K Samuel"
 id = "60b36t"
-bio = "Love bears all things, believes all things, hopes all things, endures all things ✨"
+bio = "Love bears all things, believes all things, hopes all things, endures all things."
 avatar = "img/avtr.jpg"
 links = [
     { name = "GitHub", icon = "github", url = "https://github.com/johnmaxrin" },
@@ -25,10 +25,10 @@ recent_more_text = "more »"
 date_format = "%b %-d, %Y"
 
 
-recent_news = true
-news_section_path = "/news"
-news_more_text = "more news »"
-news_max = 5
+# recent_news = false
+# news_section_path = "/news"
+# news_more_text = "more news »"
+# news_max = 5
 
 
 +++
@@ -43,5 +43,3 @@ I am a second-year M.S. student in the Department of Computer Science at IIT Mad
 
 ## Bookmarks
 {{ collection(file="bookmarks.toml") }}
-
-## News
