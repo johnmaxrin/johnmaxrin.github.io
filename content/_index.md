@@ -25,10 +25,10 @@ recent_more_text = "more »"
 date_format = "%b %-d, %Y"
 
 
-# recent_news = false
-# news_section_path = "/news"
-# news_more_text = "more news »"
-# news_max = 5
+recent_news = true
+news_section_path = "/news"
+news_more_text = "more news »"
+news_max = 5
 
 
 +++
