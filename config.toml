@@ -51,7 +51,7 @@ sections = [
   # { name = "github", path = "https://github.com/<your-username>", is_external = true },
 ]
 
-blog_section_path = "/news"
+blog_section_path = "/posts"
 
 back_link_text = "Back" # Text of the back button
 force_theme = false # false | "light" | "dark"

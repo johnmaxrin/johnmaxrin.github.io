@@ -33,7 +33,7 @@ news_max = 5
 
 +++
 
-I am a second-year M.S. student in the Department of Computer Science at IIT Madras, advised by  <a href="https://www.cse.iitm.ac.in/~rupesh/">Prof. Rupesh Nasre </a>. I make writing code for supercomputers simpler and more efficient. <sup><a href="" >Know More</a> </sup>
+I am a second-year M.S. student in the Department of Computer Science at IIT Madras, advised by  <a href="https://www.cse.iitm.ac.in/~rupesh/">Prof. Rupesh Nasre </a>. I make writing code for supercomputers simpler and more efficient. <sup><a href="/about/knwmore/" >Know More</a> </sup>
 
 
 
