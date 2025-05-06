@@ -17,6 +17,6 @@ comment = false
 reaction = false
 +++
 
-I'm Robert K Samuel. I like building things: compilers, hardware, and everything in between. I work on generating efficient code and systems from high-level abstractions using LLVM and MLIR. I have also created several MLIR dialects, some for fun and some for research.
+I like building things: compilers, hardware, and everything in between. I work on generating efficient code and systems from high-level abstractions using LLVM and MLIR. I have also created several MLIR dialects, some for fun and some for research.
 
 I am interested in problems at the intersection of programming languages, hardware, and performance. I like exploring how far we can push the art code generation.
