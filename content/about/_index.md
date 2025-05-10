@@ -1,5 +1,5 @@
 +++
-title = "About me"
+title = "About"
 description = "About page of ..."
 template = "prose.html"
 insert_anchor_links = "none"
@@ -17,6 +17,6 @@ comment = false
 reaction = false
 +++
 
-I like building things: compilers, hardware, and everything in between. I work on generating efficient code and systems from high-level abstractions using LLVM and MLIR. I have also created several MLIR dialects, some for fun and some for research.
+I like building things that work and solve real problems. I enjoy exploring new ideas and creating something useful. My main interests are code and hardware generation, It's analysis, and optimization. I am also curious about quantum circuit generation and how it can expand the limits of computation.
 
-I am interested in problems at the intersection of programming languages, hardware, and performance. I like exploring how far we can push the art code generation.
+What matters most to me is building things that make a real impact in the world.
