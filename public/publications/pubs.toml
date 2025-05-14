@@ -9,3 +9,15 @@ Data sizes are growing rapidly, making XML processing increasingly slow at large
 
 *[HiPC 2025] Accepted, Distinguished Paper Nominee 🏆*
 """
+
+[[collection]]
+type = "card"
+feature = true
+link = "https://drive.google.com/file/d/1hidAoAhgXQBpnTWTlBuCW4U3NX3_7MXq/view?usp=drive_link"
+title = "DHIR: An Intermediate Representation for Distributed Heterogeneous Computing"
+subtitle = "Robert K Samuel, Rupesh Nasre"
+content = """\
+Distributed heterogeneous systems that combine multi-core CPUs, GPUs, and multi-node clusters are now common, but coordinating computation across such diverse hardware remains challenging. A key issue is the absence of a unified intermediate representation that can model both distributed and heterogeneous execution. We present Distributed Heterogeneous IR (DHIR), an MLIR-based IR designed to express task parallelism, device placement, communication, and scheduling in a single abstraction. DHIR enables compilers to optimize distribution while preserving programmability. Experiments on 15 PolyBench/C kernels show that DHIR delivers performance comparable to expert-tuned MPI and OpenMP implementations.
+
+*Under Review*
+"""
