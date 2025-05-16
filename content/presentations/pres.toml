@@ -1,6 +1,6 @@
 [[collection]]
 type = "art"
-img = "/assets/book-3.jpg"
+img = "/img/pldi_src.png"
 title = "The Old Man and the Sea"
 link = "https://example.com"
 subtitle = "[American] Ernest Hemingway"
