@@ -1,9 +1,18 @@
 [[collection]]
 type = "art"
+img = "/img/iisc_poster.png"
+title = "An IR for Distributed Heterogeneous Computing"
+link = "https://events.csa.iisc.ac.in/csworkshop2025/"
+subtitle = "Computer Systems Workshop 2025"
+content = "This work introduces DHIR, an MLIR-based intermediate representation designed to unify distributed and heterogeneous execution. DHIR enables task parallelism, device placement, and communication within a single abstraction, improving programmability and compiler optimization across CPUs, GPUs, and clusters."
+
+
+
+[[collection]]
+type = "art"
 img = "/img/pldi_src.png"
-title = "The Old Man and the Sea"
-link = "https://example.com"
-subtitle = "[American] Ernest Hemingway"
-content = "A novella that tells the story of Santiago, an aging Cuban fisherman who struggles with a giant marlin far out in the Gulf Stream. The story is a tale of endurance, perseverance, and the human spirit's struggle against nature. It explores themes of courage, pride, and the relationship between man and the natural world."
-footer = "⭐︎⭐︎⭐︎⭐︎⭐︎"
+title = "An IR for Distributed Heterogeneous Computing"
+link = "https://pldi25.sigplan.org/track/pldi-2025-src"
+subtitle = "PLDI SRC 2025"
+content = "This work introduces DHIR, an MLIR-based intermediate representation designed to unify distributed and heterogeneous execution. DHIR enables task parallelism, device placement, and communication within a single abstraction, improving programmability and compiler optimization across CPUs, GPUs, and clusters."
 
