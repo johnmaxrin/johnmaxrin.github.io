@@ -58,8 +58,8 @@ blog_section_path = "/posts"
 back_link_text = "Back" # Text of the back button
 force_theme = false # false | "light" | "dark"
 
-footer_copyright = "© 2025 Robert K Samuel"
-footer_credits = true # Whether to show "Built with zola and serene" in footer
+footer_copyright = "© 2025 Robert K Samuel | Last Updated on Nov 2025"
+footer_credits = false # Whether to show "Built with zola and serene" in footer
 
 not_found_error_text = "404 Not Found"
 not_found_recover_text = "« back to home »"

@@ -5,7 +5,7 @@ template = 'home.html'
 lang = 'en'
 
 # Show footer in home page
-footer = false
+footer = true
 
 # If you don't want to display id/bio/avatar, simply comment out that line
 name = "Robert K Samuel"
