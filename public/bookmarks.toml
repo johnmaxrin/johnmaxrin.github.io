@@ -1,0 +1,6 @@
+[[collection]]
+type = "entry"
+icon = "https://jamesbornholt.com/me.jpg"
+link = "https://jamesbornholt.com/blog/memory-models/"
+title = "Memory Consistency Models"
+subtitle = "James Bornholt"
