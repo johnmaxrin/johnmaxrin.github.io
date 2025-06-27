@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title>News</title>
+	<subtitle>Here’s a glimpse of what I’ve been up to lately.</subtitle>
+	<link href="https://johnmaxrin.github.io/news/feed.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://johnmaxrin.github.io/news/"/>
+	<updated>2025-06-18T00:00:00+00:00</updated>
+	<id>https://johnmaxrin.github.io/news/feed.xml</id>
+	<entry xml:lang="en">
+		<title>Presented at PLDI 2025 SRC and Received PLMW Scholarship</title>
+		<published>2025-06-18T00:00:00+00:00</published>
+		<updated>2025-06-18T00:00:00+00:00</updated>
+		<link href="https://johnmaxrin.github.io/news/pldi-25-src/" type="text/html"/>
+		<id>https://johnmaxrin.github.io/news/pldi-25-src/</id>
+		<content type="html">&lt;p&gt;I&#x27;m excited to share that I presented my work at the &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;pldi25.sigplan.org&#x2F;track&#x2F;pldi-2025-src&quot;&gt;PLDI 2025 Student Research Competition (SRC)&lt;&#x2F;a&gt;!&lt;br &#x2F;&gt;
+My extended abstract was published in the PLDI 2025 proceedings, and I had a wonderful opportunity to engage with researchers in programming languages and systems.&lt;&#x2F;p&gt;
+&lt;p&gt;🎉 I was also honored to receive the &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;pldi25.sigplan.org&#x2F;track&#x2F;PLMW-PLDI-2025&quot;&gt;PLMW (Programming Languages Mentoring Workshop)&lt;&#x2F;a&gt; scholarship.&lt;&#x2F;p&gt;
+&lt;p&gt;You can check out my slides here:&lt;br &#x2F;&gt;
+👉 &lt;a href=&quot;&#x2F;pdfs&#x2F;pldi_25.pdf&quot;&gt;Download Slides (PDF)&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</content>
+	</entry>
+</feed>
