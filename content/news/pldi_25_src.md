@@ -9,4 +9,4 @@ My extended abstract was published in the PLDI 2025 proceedings, and I had a won
 🎉 I was also honored to receive the [PLMW (Programming Languages Mentoring Workshop)](https://pldi25.sigplan.org/track/PLMW-PLDI-2025) scholarship.
 
 You can check out my slides here:  
-👉 [Download Slides (PDF)](/pdfs/pldi_25.pdf)
+👉 [Download Slides (PDF)](/pdfs/pldi_src_25.pdf)
