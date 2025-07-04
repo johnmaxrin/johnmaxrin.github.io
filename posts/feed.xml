@@ -4,8 +4,114 @@
 	<subtitle>My blog site.</subtitle>
 	<link href="https://johnmaxrin.github.io/posts/feed.xml" rel="self" type="application/atom+xml"/>
     <link href="https://johnmaxrin.github.io/posts/"/>
-	<updated>2025-06-04T00:00:00+00:00</updated>
+	<updated>2025-07-24T00:00:00+00:00</updated>
 	<id>https://johnmaxrin.github.io/posts/feed.xml</id>
+	<entry xml:lang="en">
+		<title>Intro to Polyhedral Analysis in MLIR - I</title>
+		<published>2025-07-24T00:00:00+00:00</published>
+		<updated>2025-07-24T00:00:00+00:00</updated>
+		<link href="https://johnmaxrin.github.io/posts/painmlir/" type="text/html"/>
+		<id>https://johnmaxrin.github.io/posts/painmlir/</id>
+		<content type="html">&lt;p&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;http:&#x2F;&#x2F;polyhedral.info&#x2F;&quot;&gt;&lt;strong&gt;Polyhedral analysis&lt;&#x2F;strong&gt;&lt;&#x2F;a&gt; is a mathematical framework used to analyze and transform loop nests in programs—particularly those with static control parts (where loop bounds and memory accesses are affine expressions). This model represents iteration domains, loop bounds, and memory access patterns as systems of linear inequalities. These sets can then be used for powerful optimizations such as loop fusion, tiling, interchange, and parallelization.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;what-it-means-in-practice&quot;&gt;What It Means in Practice&lt;a class=&quot;zola-anchor&quot; href=&quot;#what-it-means-in-practice&quot; aria-label=&quot;Anchor link for: what-it-means-in-practice&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h1&gt;
+&lt;p&gt;Suppose you have a matrix multiplication function written in MLIR using the &lt;code&gt;affine.for&lt;&#x2F;code&gt; dialect with dynamic sizes for matrices:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;mlir&quot; class=&quot;language-mlir z-code&quot;&gt;&lt;code class=&quot;language-mlir&quot; data-lang=&quot;mlir&quot;&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;func.func @matmul(%A: memref&amp;lt;?x?xf32&amp;gt;, %B: memref&amp;lt;?x?xf32&amp;gt;, %C: memref&amp;lt;?x?xf32&amp;gt;) {
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;  %c0 = arith.constant 0 : index
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;  %c1 = arith.constant 1 : index
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;  %M = memref.dim %A, %c0 : memref&amp;lt;?x?xf32&amp;gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;  %N = memref.dim %B, %c1 : memref&amp;lt;?x?xf32&amp;gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;  %K = memref.dim %A, %c1 : memref&amp;lt;?x?xf32&amp;gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;  affine.for %i = 0 to %M step 1 {
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;    affine.for %j = 0 to %N {
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;      affine.for %k = 0 to %K {
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;        %a = affine.load %A[%i, %k] : memref&amp;lt;?x?xf32&amp;gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;        %b = affine.load %B[%k, %j] : memref&amp;lt;?x?xf32&amp;gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;        %c = affine.load %C[%i, %j] : memref&amp;lt;?x?xf32&amp;gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;        %prod = arith.mulf %a, %b : f32
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;        %sum = arith.addf %c, %prod : f32
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;        affine.store %sum, %C[%i, %j] : memref&amp;lt;?x?xf32&amp;gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;      }
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;    }
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;  }
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;  return
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This code uses affine.for loops with dynamic bounds computed at runtime (%M, %N, %K) via memref.dim. The loop nests iterate over all valid (i, j, k) indices for matrix multiplication, and use affine loads and stores to access memory in a way that can be modeled with the polyhedral model.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;extracting-the-polyhedral-model&quot;&gt;Extracting the Polyhedral Model&lt;a class=&quot;zola-anchor&quot; href=&quot;#extracting-the-polyhedral-model&quot; aria-label=&quot;Anchor link for: extracting-the-polyhedral-model&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h1&gt;
+&lt;p&gt;MLIR provides the infrastructure to extract this iteration domain into a formal representation called a FlatAffineValueConstraints. This object stores the loop&#x27;s constraints in a matrix form, representing:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Domain dimensions (induction variables)&lt;&#x2F;li&gt;
+&lt;li&gt;Symbols (parameters&#x2F;constants)&lt;&#x2F;li&gt;
+&lt;li&gt;A set of linear inequalities&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;You can extract this model using the getIndexSet function:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;mlir&quot; class=&quot;language-mlir z-code&quot;&gt;&lt;code class=&quot;language-mlir&quot; data-lang=&quot;mlir&quot;&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;affine::FlatAffineValueConstraints constraints; 
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;SmallVector&amp;lt;Operation *, 4&amp;gt; ops;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;module-&amp;gt;walk&amp;lt;mlir::WalkOrder::PreOrder&amp;gt;([&amp;amp;](mlir::affine::AffineForOp forOp) {
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;  ops.push_back(forOp);  
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;});
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;affine::getIndexSet(ops, &amp;amp;constraints);
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;constraints.dump();
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This generates a model like:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;yaml&quot; class=&quot;language-yaml z-code&quot;&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;z-source z-yaml&quot;&gt;&lt;span class=&quot;z-string z-unquoted z-plain z-out z-yaml&quot;&gt;&lt;span class=&quot;z-entity z-name z-tag z-yaml&quot;&gt;Domain&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-separator z-key-value z-mapping z-yaml&quot;&gt;:&lt;&#x2F;span&gt; &lt;span class=&quot;z-string z-unquoted z-plain z-out z-yaml&quot;&gt;&lt;span class=&quot;z-entity z-name z-tag z-yaml&quot;&gt;0, Range&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-separator z-key-value z-mapping z-yaml&quot;&gt;:&lt;&#x2F;span&gt; &lt;span class=&quot;z-string z-unquoted z-plain z-out z-yaml&quot;&gt;&lt;span class=&quot;z-entity z-name z-tag z-yaml&quot;&gt;3, Symbols&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-separator z-key-value z-mapping z-yaml&quot;&gt;:&lt;&#x2F;span&gt; &lt;span class=&quot;z-string z-unquoted z-plain z-out z-yaml&quot;&gt;&lt;span class=&quot;z-entity z-name z-tag z-yaml&quot;&gt;3, Locals&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-separator z-key-value z-mapping z-yaml&quot;&gt;:&lt;&#x2F;span&gt; &lt;span class=&quot;z-constant z-numeric z-integer z-decimal z-yaml&quot;&gt;0&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-yaml&quot;&gt;&lt;span class=&quot;z-string z-unquoted z-plain z-out z-yaml&quot;&gt;&lt;span class=&quot;z-entity z-name z-tag z-yaml&quot;&gt;( ) -&amp;gt; ( i j k )&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-punctuation z-separator z-key-value z-mapping z-yaml&quot;&gt;:&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-flow-sequence z-yaml&quot;&gt;&lt;span class=&quot;z-punctuation z-definition z-sequence z-begin z-yaml&quot;&gt;[&lt;&#x2F;span&gt; &lt;span class=&quot;z-string z-unquoted z-plain z-in z-yaml&quot;&gt;M N K&lt;&#x2F;span&gt; &lt;span class=&quot;z-punctuation z-definition z-sequence z-end z-yaml&quot;&gt;]&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-yaml&quot;&gt;&lt;span class=&quot;z-string z-unquoted z-plain z-out z-yaml&quot;&gt;6 constraints&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-yaml&quot;&gt;&lt;span class=&quot;z-string z-unquoted z-plain z-out z-yaml&quot;&gt;(Value  Value   Value   Value   Value   Value   const)&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-yaml&quot;&gt;  &lt;span class=&quot;z-string z-unquoted z-plain z-out z-yaml&quot;&gt;1  0  0  0  0  0  0 &amp;gt;= 0&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-yaml&quot;&gt; &lt;span class=&quot;z-string z-unquoted z-plain z-out z-yaml&quot;&gt;-1  0  0  1  0  0 -1 &amp;gt;= 0&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-yaml&quot;&gt;  &lt;span class=&quot;z-string z-unquoted z-plain z-out z-yaml&quot;&gt;0  1  0  0  0  0  0 &amp;gt;= 0&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-yaml&quot;&gt;  &lt;span class=&quot;z-string z-unquoted z-plain z-out z-yaml&quot;&gt;0 -1  0  0  1  0 -1 &amp;gt;= 0&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-yaml&quot;&gt;  &lt;span class=&quot;z-string z-unquoted z-plain z-out z-yaml&quot;&gt;0  0  1  0  0  0  0 &amp;gt;= 0&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-yaml&quot;&gt;  &lt;span class=&quot;z-string z-unquoted z-plain z-out z-yaml&quot;&gt;0  0 -1  0  0  1 -1 &amp;gt;= 0&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;interpreting-the-output&quot;&gt;Interpreting the Output&lt;a class=&quot;zola-anchor&quot; href=&quot;#interpreting-the-output&quot; aria-label=&quot;Anchor link for: interpreting-the-output&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;This output captures the bounds of the loop nest. Here&#x27;s how to interpret it:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;There are 3 loop variables (i, j, k) corresponding to %arg3, %arg4, and %arg5.&lt;&#x2F;li&gt;
+&lt;li&gt;There are 3 symbols (M, N, K) corresponding to the upper bounds 200, 300, and 400 (these can be parametric).&lt;&#x2F;li&gt;
+&lt;li&gt;The constraints describe the bounds:&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;pre data-lang=&quot;yaml&quot; class=&quot;language-yaml z-code&quot;&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;z-source z-yaml&quot;&gt;&lt;span class=&quot;z-string z-unquoted z-plain z-out z-yaml&quot;&gt;i &amp;gt;= 0&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-yaml&quot;&gt;&lt;span class=&quot;z-string z-unquoted z-plain z-out z-yaml&quot;&gt;i &amp;lt;= M - 1&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-yaml&quot;&gt;&lt;span class=&quot;z-string z-unquoted z-plain z-out z-yaml&quot;&gt;j &amp;gt;= 0&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-yaml&quot;&gt;&lt;span class=&quot;z-string z-unquoted z-plain z-out z-yaml&quot;&gt;j &amp;lt;= N - 1&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-yaml&quot;&gt;&lt;span class=&quot;z-string z-unquoted z-plain z-out z-yaml&quot;&gt;k &amp;gt;= 0&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-yaml&quot;&gt;&lt;span class=&quot;z-string z-unquoted z-plain z-out z-yaml&quot;&gt;k &amp;lt;= K - 1&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This forms a polyhedron in 3D space, bounded by the affine inequalities.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;why-this-matters&quot;&gt;Why This Matters&lt;a class=&quot;zola-anchor&quot; href=&quot;#why-this-matters&quot; aria-label=&quot;Anchor link for: why-this-matters&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h1&gt;
+&lt;p&gt;Once this model is constructed, the compiler can:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Detect loop-carried dependencies&lt;&#x2F;li&gt;
+&lt;li&gt;Apply loop transformations legally&lt;&#x2F;li&gt;
+&lt;li&gt;Optimize data movement&lt;&#x2F;li&gt;
+&lt;li&gt;Parallelize independent loop iterations&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;All of this is grounded in formal, provable correctness through the polyhedral representation.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;final-thoughts&quot;&gt;Final Thoughts&lt;a class=&quot;zola-anchor&quot; href=&quot;#final-thoughts&quot; aria-label=&quot;Anchor link for: final-thoughts&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h1&gt;
+&lt;p&gt;MLIR brings polyhedral analysis closer to everyday compiler IR workflows. With affine dialect, and analysis utilities like FlatAffineValueConstraints, MLIR makes it possible to perform sophisticated optimizations automatically. This is especially powerful in domains like HPC, deep learning, and scientific computing.&lt;&#x2F;p&gt;
+&lt;p&gt;If you&#x27;re writing compilers or building optimizers, MLIR&#x27;s polyhedral framework is not just a theory—it&#x27;s a tool you can use today.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;references&quot;&gt;References&lt;a class=&quot;zola-anchor&quot; href=&quot;#references&quot; aria-label=&quot;Anchor link for: references&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=Xg4RfgPIT-Y&quot;&gt; 2022 EuroLLVM Dev Mtg “Precise Polyhedral Analyses For MLIR using the FPL Presburger Library” &lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=fcBkr4mk-8A&quot;&gt; Polyhedral Analyses using MLIR&#x27;s Affine dialect - Vinayaka Bandishti &lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=jBgU_EeUKYw&quot;&gt; Polyhedral Analyses using MLIR&#x27;s Affine Dialect (contd.) &lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=BKcFoP6B4Rw&quot;&gt; Compiler Design Module 128 : Introduction to the Polyhedral Framework &lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>MLIR GPU-Dialect “Hello World” Tutorial</title>
 		<published>2025-06-04T00:00:00+00:00</published>
