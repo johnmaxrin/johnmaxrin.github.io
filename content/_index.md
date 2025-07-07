@@ -23,6 +23,14 @@ recent = true
 recent_max = 15
 recent_more_text = "more »"
 date_format = "%b %-d, %Y"
+
+
+recent_news = true
+news_section_path = "/news"
+news_more_text = "more news »"
+news_max = 5
+
+
 +++
 
 I am a second-year M.S. student in the Department of Computer Science at IIT Madras, advised by  <a href="https://www.cse.iitm.ac.in/~rupesh/">Prof. Rupesh Nasre </a>. I make writing code for supercomputers simpler and more efficient. <sup><a href="" >Know More</a> </sup>
