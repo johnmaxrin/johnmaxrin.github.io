@@ -12,7 +12,7 @@
   
   <meta name="description" content="My blog site.">
 
-  <title>Know More</title>
+  <title>Research</title>
   <link rel="icon" type="image/png" sizes="32x32" href="https://johnmaxrin.github.io/img/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="https://johnmaxrin.github.io/img/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="https://johnmaxrin.github.io/img/apple-touch-icon.png">
@@ -109,7 +109,7 @@
       <ul>
         
         <li>
-          <a class="h2" href="#dhir">DHIR</a>
+          <a class="h2" href="#distributed-heterogeneous-computing">Distributed Heterogeneous Computing</a>
           
         </li>
         
@@ -153,7 +153,7 @@
 "></div>
       
       <article class="prose">
-        <h1>Know More</h1>
+        <h1>Research</h1>
         <div id="post-info">
           <div id="date">
             <span id="publish">May 5, 2025</span>
@@ -167,7 +167,21 @@
 
         
 
-        <h2 id="dhir">DHIR</h2>
+        <h3 id="distributed-heterogeneous-computing">Distributed Heterogeneous Computing</h3>
+<p>I work on making it easier to build compilers for supercomputers. Today, if you are developing a domain-specific language (DSL) or a compiler, supporting distributed and heterogeneous systems usually means writing a lot of low-level code for synchronization, communication, and device-specific details.</p>
+<p>To address this, I designed a new <strong>intermediate representation (IR)</strong> called <strong>DHIR</strong>.</p>
+<ul>
+<li><strong>DHIR is built on MLIR</strong> and acts as a <strong>middleware IR</strong> between high-level dialects (like SCF, Affine etc) and low-level hardware IRs (such as LLVM IR).</li>
+<li>It provides a structured way to represent <strong>distributed heterogeneous execution</strong>, so compiler developers don’t need to manually insert synchronization or communication.</li>
+<li>The infrastructure automatically takes care of:
+<ul>
+<li>Respecting <strong>dependencies</strong></li>
+<li>Inserting <strong>synchronization</strong></li>
+<li>Handling <strong>data movement and communication primitives</strong></li>
+</ul>
+</li>
+</ul>
+<p>This means DSL and compiler developers can focus on the <strong>semantics of their language</strong>, while DHIR handles the <strong>system-level concerns</strong> of mapping to distributed, heterogeneous machines.</p>
 <h2 id="starplat-milr">StarPlat MILR</h2>
 <h2 id="debug-dialect">Debug Dialect</h2>
 
