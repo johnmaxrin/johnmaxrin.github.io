@@ -4,8 +4,144 @@
 	<subtitle>My blog site.</subtitle>
 	<link href="https://johnmaxrin.github.io/posts/feed.xml" rel="self" type="application/atom+xml"/>
     <link href="https://johnmaxrin.github.io/posts/"/>
-	<updated>2025-07-25T00:00:00+00:00</updated>
+	<updated>2025-08-25T00:00:00+00:00</updated>
 	<id>https://johnmaxrin.github.io/posts/feed.xml</id>
+	<entry xml:lang="en">
+		<title>Towards a Universal Compiler</title>
+		<published>2025-08-25T00:00:00+00:00</published>
+		<updated>2025-08-25T00:00:00+00:00</updated>
+		<link href="https://johnmaxrin.github.io/posts/reconfig/" type="text/html"/>
+		<id>https://johnmaxrin.github.io/posts/reconfig/</id>
+		<content type="html">&lt;p&gt;I always wanted to create a &lt;strong&gt;universal compiler&lt;&#x2F;strong&gt;, Something that could take &lt;strong&gt;source code + a system ISA specification&lt;&#x2F;strong&gt; and directly produce the &lt;strong&gt;binary&lt;&#x2F;strong&gt; that runs on hardware. Imagine describing your architecture, feeding it into the compiler, and immediately being able to run programs on it.&lt;&#x2F;p&gt;
+&lt;p&gt;In this blog, I’ll share some of my learnings on this journey, starting from one of the earliest serious attempts at a retargetable compiler: &lt;strong&gt;Fraser’s lcc (1991)&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;fraser-s-vision-1991&quot;&gt;Fraser’s Vision (1991)&lt;a class=&quot;zola-anchor&quot; href=&quot;#fraser-s-vision-1991&quot; aria-label=&quot;Anchor link for: fraser-s-vision-1991&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;The idea of a “universal compiler” isn’t new. Back in 1991, &lt;strong&gt;Christopher Fraser and David Hanson&lt;&#x2F;strong&gt; built &lt;strong&gt;lcc&lt;&#x2F;strong&gt;, a C compiler that was:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Fast&lt;&#x2F;strong&gt; (both in compilation speed and generated code quality),&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Retargettable&lt;&#x2F;strong&gt; (easy to support new CPUs),&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Small&lt;&#x2F;strong&gt; (compact codebase, far smaller than GCC),&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;High quality&lt;&#x2F;strong&gt; (conformed to ANSI C, passed validation suites).&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Their secret was &lt;strong&gt;separating the frontend and backend&lt;&#x2F;strong&gt;:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;strong&gt;frontend&lt;&#x2F;strong&gt; was target-agnostic and did a handful of simple but effective optimizations:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Constant folding&lt;&#x2F;li&gt;
+&lt;li&gt;Local common subexpression elimination&lt;&#x2F;li&gt;
+&lt;li&gt;Simulated register declarations&lt;&#x2F;li&gt;
+&lt;li&gt;Dense jump tables for switch statements&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;strong&gt;backend&lt;&#x2F;strong&gt; was driven by a &lt;strong&gt;rule-based DSL&lt;&#x2F;strong&gt;.&lt;br &#x2F;&gt;
+Rules defined how DAG (Directed Acyclic Graph) nodes in the intermediate representation mapped to target instructions.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Example of what a rule looked like (simplified):&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;asm&quot; class=&quot;language-asm z-code&quot;&gt;&lt;code class=&quot;language-asm&quot; data-lang=&quot;asm&quot;&gt;&lt;span class=&quot;z-source z-assembly&quot;&gt;&lt;span class=&quot;z-keyword z-control z-assembly&quot;&gt;add&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name z-function z-assembly&quot;&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name z-function z-assembly&quot;&gt;r&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-assembly&quot;&gt;,&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name z-function z-assembly&quot;&gt; &lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name z-function z-assembly&quot;&gt;s&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name z-function z-assembly&quot;&gt;)&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name z-function z-assembly&quot;&gt; &lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name z-function z-assembly&quot;&gt;→&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name z-function z-assembly&quot;&gt; &lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword z-control z-assembly&quot;&gt;ADD&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name z-function z-assembly&quot;&gt; &lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name z-function z-assembly&quot;&gt;r&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-assembly&quot;&gt;,&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name z-function z-assembly&quot;&gt; &lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name z-function z-assembly&quot;&gt;s&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name z-function z-assembly&quot;&gt; &lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name z-function z-assembly&quot;&gt;c&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name z-function z-assembly&quot;&gt;o&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name z-function z-assembly&quot;&gt;s&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name z-function z-assembly&quot;&gt;t&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name z-function z-assembly&quot;&gt;=&lt;&#x2F;span&gt;&lt;span class=&quot;z-constant z-character z-decimal z-assembly&quot;&gt;1&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;These rules captured:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;strong&gt;pattern of DAG operators&lt;&#x2F;strong&gt; (e.g., &lt;code&gt;add&lt;&#x2F;code&gt;, &lt;code&gt;mul&lt;&#x2F;code&gt;, &lt;code&gt;mem[addr]&lt;&#x2F;code&gt;)&lt;&#x2F;li&gt;
+&lt;li&gt;The &lt;strong&gt;target instruction form&lt;&#x2F;strong&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Costs&#x2F;constraints&lt;&#x2F;strong&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;A &lt;strong&gt;rule compiler&lt;&#x2F;strong&gt; (written in Icon!) translated these rules into a &lt;strong&gt;hard-coded instruction selector&lt;&#x2F;strong&gt; (a tree-pattern matcher). The backend became a &lt;strong&gt;monolithic C program&lt;&#x2F;strong&gt;: fast, compact, and specific to the ISA. The same mechanism also supported &lt;strong&gt;peephole optimizations&lt;&#x2F;strong&gt;: rules that rewrote naïve sequences into more efficient ones.&lt;&#x2F;p&gt;
+&lt;p&gt;The frontend and backend communicated via a &lt;strong&gt;tight interface&lt;&#x2F;strong&gt;:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;~17 functions (&lt;code&gt;emit_prologue&lt;&#x2F;code&gt;, &lt;code&gt;emit_data&lt;&#x2F;code&gt;, …)&lt;&#x2F;li&gt;
+&lt;li&gt;A 36-operator DAG language&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;This &lt;strong&gt;clean split&lt;&#x2F;strong&gt; made retargeting remarkably easy. To port lcc, you only needed:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;A &lt;strong&gt;configuration file&lt;&#x2F;strong&gt; (data sizes, alignments, calling conventions),&lt;&#x2F;li&gt;
+&lt;li&gt;A few &lt;strong&gt;backend support functions&lt;&#x2F;strong&gt;,&lt;&#x2F;li&gt;
+&lt;li&gt;A &lt;strong&gt;rule set&lt;&#x2F;strong&gt; for code generation.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;Fraser reported that each new target (VAX, MIPS, SPARC, 68020) required only &lt;strong&gt;377–522 lines&lt;&#x2F;strong&gt; of code. That’s a crazy low effort compared to retargeting GCC.&lt;&#x2F;p&gt;
+&lt;p&gt;👉 You can read the original paper here: &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;dl.acm.org&#x2F;doi&#x2F;pdf&#x2F;10.1145&#x2F;122616.122621&quot;&gt;A Retargetable Compiler for ANSI C (1991)&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;drawbacks-of-fraser-s-approach&quot;&gt;Drawbacks of Fraser’s Approach&lt;a class=&quot;zola-anchor&quot; href=&quot;#drawbacks-of-fraser-s-approach&quot; aria-label=&quot;Anchor link for: drawbacks-of-fraser-s-approach&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;While lcc was ahead of its time, it also had &lt;strong&gt;serious limitations&lt;&#x2F;strong&gt;. Many of these explain why modern infrastructures like LLVM and MLIR took different paths.&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Limited Optimization&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;No global optimizations, no SSA, no dataflow analyses.&lt;&#x2F;li&gt;
+&lt;li&gt;Generated code was “good enough” but lagged behind vendor compilers and later GCC&#x2F;LLVM.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Tiny IR (36-operator DAG)&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Too low-level, closer to canonicalized trees than a flexible IR.&lt;&#x2F;li&gt;
+&lt;li&gt;Couldn’t represent advanced optimizations like loop transformations or vectorization.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Local Instruction Selection Only&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Rules mapped one DAG at a time → no global instruction scheduling.&lt;&#x2F;li&gt;
+&lt;li&gt;Couldn’t handle complex idioms (e.g., &lt;code&gt;memcpy&lt;&#x2F;code&gt; → &lt;code&gt;rep movsb&lt;&#x2F;code&gt; on x86, delay slots on SPARC).&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Shallow Retargetability&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Worked well for clean RISC ISAs (MIPS, SPARC, VAX).&lt;&#x2F;li&gt;
+&lt;li&gt;Much harder for “irregular” ISAs like x86, DSPs, or GPUs.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Opaque Generated Backends&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;The rule compiler produced large monolithic C code.&lt;&#x2F;li&gt;
+&lt;li&gt;Fast, but hard to debug or customize compared to data-driven matchers.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Language Lock-In&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Frontend was tightly coupled to ANSI C.&lt;&#x2F;li&gt;
+&lt;li&gt;Couldn’t serve as a general-purpose compiler infrastructure.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Didn’t Scale with Hardware Trends&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Built before superscalar, SIMD, multicore, and GPUs became dominant.&lt;&#x2F;li&gt;
+&lt;li&gt;The tiny DAG IR couldn’t express parallelism or vector-level semantics.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;why-it-still-matters&quot;&gt;Why It Still Matters&lt;a class=&quot;zola-anchor&quot; href=&quot;#why-it-still-matters&quot; aria-label=&quot;Anchor link for: why-it-still-matters&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;Despite its limitations, Fraser’s approach was &lt;strong&gt;visionary&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;strong&gt;declarative rule-based backend&lt;&#x2F;strong&gt; foreshadowed LLVM’s &lt;strong&gt;TableGen&lt;&#x2F;strong&gt;, MLIR’s &lt;strong&gt;ODS&lt;&#x2F;strong&gt;, Cranelift’s &lt;strong&gt;ISLE&lt;&#x2F;strong&gt;, and GNU’s &lt;strong&gt;CGEN&lt;&#x2F;strong&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;The &lt;strong&gt;tight front–backend interface&lt;&#x2F;strong&gt; showed that &lt;strong&gt;retargeting can be simple&lt;&#x2F;strong&gt; if the abstraction is chosen well.&lt;&#x2F;li&gt;
+&lt;li&gt;The &lt;strong&gt;focus on speed + smallness&lt;&#x2F;strong&gt; influenced generations of lightweight compilers used in embedded systems and education.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;In short: Fraser’s lcc was a &lt;strong&gt;proto-universal compiler&lt;&#x2F;strong&gt;. It wasn’t powerful enough to scale into LLVM, but it proved the idea: &lt;em&gt;source code + machine spec → working compiler backend&lt;&#x2F;em&gt;.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;my-takeaway&quot;&gt;My Takeaway&lt;a class=&quot;zola-anchor&quot; href=&quot;#my-takeaway&quot; aria-label=&quot;Anchor link for: my-takeaway&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;As I think about building a universal compiler today, Fraser’s work reminds me:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Keep the &lt;strong&gt;interfaces clean&lt;&#x2F;strong&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;Automate as much as possible (rule compilers, declarative ISAs).&lt;&#x2F;li&gt;
+&lt;li&gt;Balance &lt;strong&gt;simplicity vs optimization&lt;&#x2F;strong&gt; — you can always add more sophisticated passes later.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;LLVM, MLIR, and even modern DSLs for ISAs (like &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;ghidra.re&#x2F;ghidra_docs&#x2F;languages&#x2F;html&#x2F;sleigh.html&quot;&gt;SLEIGH in Ghidra&lt;&#x2F;a&gt; or &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;riscv&#x2F;sail-riscv&quot;&gt;Sail for formal specs&lt;&#x2F;a&gt;) are essentially “Fraser’s dream, at scale”.&lt;&#x2F;p&gt;
+&lt;p&gt;The journey towards a universal compiler isn’t finished, but lcc shows we’ve been chasing this dream for decades.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>Intro to Polyhedral Analysis in MLIR - II</title>
 		<published>2025-07-25T00:00:00+00:00</published>

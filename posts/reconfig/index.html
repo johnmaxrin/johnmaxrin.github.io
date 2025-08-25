@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  
+  
+    
+  
+  <meta name="description" content="My Learnings">
+
+  <title>Towards a Universal Compiler</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="https://johnmaxrin.github.io/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://johnmaxrin.github.io/img/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://johnmaxrin.github.io/img/apple-touch-icon.png">
+  
+  <style>
+
+  /* light mode colors */
+  body {
+    --primary-color: #5871a2;
+    --primary-pale-color: #5871a233;
+    --primary-decoration-color: #5871a210;
+    --bg-color: #ffffff;
+    --text-color: #2f3030;
+    --text-pale-color: #767676;
+    --text-decoration-color: #a9a9a9;
+    --highlight-mark-color: #5f75b020;
+
+    --callout-note-color: #5871a2;
+    --callout-tip-color: #268556;
+    --callout-important-color: #885fc9;
+    --callout-warning-color: #ab6632;
+    --callout-caution-color: #c64e4e;
+  }
+
+  /* dark mode colors */
+  body.dark {
+    --primary-color: #6f8fd1;
+    --primary-pale-color: #6f8fd166;
+    --primary-decoration-color: #6f8fd112;
+    --bg-color: #1c1c1c;
+    --text-color: #c1c1c1;
+    --text-pale-color: #848484;
+    --text-decoration-color: #5f5f5f;
+    --highlight-mark-color: #8296cb3b;
+
+    --callout-note-color: #6f8fd1;
+    --callout-tip-color: #47976f;
+    --callout-important-color: #9776cd;
+    --callout-warning-color: #ad7a52;
+    --callout-caution-color: #d06161;
+  }
+
+  /* typography */
+  body {
+    --main-font: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --code-font: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    --homepage-max-width: 768px;
+    --main-max-width: 768px;
+    --avatar-size: 60px;
+    --font-size: 16px;
+    --line-height: 1.75;
+    --img-border-radius: 0px;
+    --detail-border-radius: 0px;
+    --dark-mode-img-brightness: 0.75;
+    --dark-mode-chart-brightness: 0.75;
+    --inline-code-border-radius: 2px;
+    --inline-code-bg-color: var(--primary-decoration-color);
+    --block-code-border-radius: 0px;
+    --block-code-border-color: var(--primary-color);
+    --detail-border-color: var(--primary-color);
+  }
+
+</style>
+
+  <link rel="stylesheet" href="https://johnmaxrin.github.io/main.css">
+  
+
+<link id="hl" rel="stylesheet" type="text/css" href="/hl-light.css" />
+
+
+
+  
+</head>
+
+<body class="post">
+  
+  <script>
+    const theme = sessionStorage.getItem('theme');
+    const match = window.matchMedia("(prefers-color-scheme: dark)").matches
+    if ((theme && theme == 'dark') || (!theme && match)) {
+      document.body.classList.add('dark');
+      const hl = document.querySelector('link#hl');
+      if (hl) hl.href = 'https://johnmaxrin.github.io/hl-dark.css';
+    }
+  </script>
+  
+  
+<div id="wrapper">
+  <div id="blank"></div>
+  <aside>
+    
+    
+    <nav>
+      <ul>
+        
+        <li>
+          <a class="h2" href="#fraser-s-vision-1991">Fraser’s Vision (1991)</a>
+          
+        </li>
+        
+        <li>
+          <a class="h2" href="#drawbacks-of-fraser-s-approach">Drawbacks of Fraser’s Approach</a>
+          
+        </li>
+        
+        <li>
+          <a class="h2" href="#why-it-still-matters">Why It Still Matters</a>
+          
+        </li>
+        
+        <li>
+          <a class="h2" href="#my-takeaway">My Takeaway</a>
+          
+        </li>
+        
+      </ul>
+    </nav>
+    
+    
+    <button id="back-to-top" aria-label="back to top">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-up"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+
+    </button>
+    
+  </aside>
+  <main>
+    
+<header>
+  <nav>
+    <a href="https:&#x2F;&#x2F;johnmaxrin.github.io&#x2F;posts">← Back</a>
+  </nav>
+</header>
+
+
+    <div>
+      
+      
+      
+      
+      <div id="copy-cfg" style="display: none;" data-copy-icon="&lt;svg xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2000&#x2F;svg&quot; viewBox=&quot;0 0 24 24&quot; width=&quot;18&quot; height=&quot;18&quot;&gt;&lt;path d=&quot;M6.9998 6V3C6.9998 2.44772 7.44752 2 7.9998 2H19.9998C20.5521 2 20.9998 2.44772 20.9998 3V17C20.9998 17.5523 20.5521 18 19.9998 18H16.9998V20.9991C16.9998 21.5519 16.5499 22 15.993 22H4.00666C3.45059 22 3 21.5554 3 20.9991L3.0026 7.00087C3.0027 6.44811 3.45264 6 4.00942 6H6.9998ZM5.00242 8L5.00019 20H14.9998V8H5.00242ZM8.9998 6H16.9998V16H18.9998V4H8.9998V6Z&quot; fill=&quot;currentColor&quot;&gt;&lt;&#x2F;path&gt;&lt;&#x2F;svg&gt;
+" data-check-icon="&lt;svg xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2000&#x2F;svg&quot; viewBox=&quot;0 0 24 24&quot; width=&quot;18&quot; height=&quot;18&quot;&gt;&lt;path d=&quot;M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z&quot; fill=&quot;currentColor&quot;&gt;&lt;&#x2F;path&gt;&lt;&#x2F;svg&gt;
+"></div>
+      
+      <article class="prose">
+        <h1>Towards a Universal Compiler</h1>
+        <div id="post-info">
+          <div id="date">
+            <span id="publish">Aug 25, 2025</span>
+            </div>
+
+          
+        </div>
+
+        
+        
+
+        
+
+        <p>I always wanted to create a <strong>universal compiler</strong>, Something that could take <strong>source code + a system ISA specification</strong> and directly produce the <strong>binary</strong> that runs on hardware. Imagine describing your architecture, feeding it into the compiler, and immediately being able to run programs on it.</p>
+<p>In this blog, I’ll share some of my learnings on this journey, starting from one of the earliest serious attempts at a retargetable compiler: <strong>Fraser’s lcc (1991)</strong>.</p>
+<hr />
+<h2 id="fraser-s-vision-1991">Fraser’s Vision (1991)<a class="zola-anchor" href="#fraser-s-vision-1991" aria-label="Anchor link for: fraser-s-vision-1991" style="visibility: hidden;"></a>
+</h2>
+<p>The idea of a “universal compiler” isn’t new. Back in 1991, <strong>Christopher Fraser and David Hanson</strong> built <strong>lcc</strong>, a C compiler that was:</p>
+<ul>
+<li><strong>Fast</strong> (both in compilation speed and generated code quality),</li>
+<li><strong>Retargettable</strong> (easy to support new CPUs),</li>
+<li><strong>Small</strong> (compact codebase, far smaller than GCC),</li>
+<li><strong>High quality</strong> (conformed to ANSI C, passed validation suites).</li>
+</ul>
+<p>Their secret was <strong>separating the frontend and backend</strong>:</p>
+<ul>
+<li>
+<p>The <strong>frontend</strong> was target-agnostic and did a handful of simple but effective optimizations:</p>
+<ul>
+<li>Constant folding</li>
+<li>Local common subexpression elimination</li>
+<li>Simulated register declarations</li>
+<li>Dense jump tables for switch statements</li>
+</ul>
+</li>
+<li>
+<p>The <strong>backend</strong> was driven by a <strong>rule-based DSL</strong>.<br />
+Rules defined how DAG (Directed Acyclic Graph) nodes in the intermediate representation mapped to target instructions.</p>
+</li>
+</ul>
+<p>Example of what a rule looked like (simplified):</p>
+<pre data-lang="asm" class="language-asm z-code"><code class="language-asm" data-lang="asm"><span class="z-source z-assembly"><span class="z-keyword z-control z-assembly">add</span><span class="z-entity z-name z-function z-assembly">(</span><span class="z-entity z-name z-function z-assembly">r</span><span class="z-source z-assembly">,</span><span class="z-entity z-name z-function z-assembly"> </span><span class="z-entity z-name z-function z-assembly">s</span><span class="z-entity z-name z-function z-assembly">)</span><span class="z-entity z-name z-function z-assembly"> </span><span class="z-entity z-name z-function z-assembly">→</span><span class="z-entity z-name z-function z-assembly"> </span><span class="z-keyword z-control z-assembly">ADD</span><span class="z-entity z-name z-function z-assembly"> </span><span class="z-entity z-name z-function z-assembly">r</span><span class="z-source z-assembly">,</span><span class="z-entity z-name z-function z-assembly"> </span><span class="z-entity z-name z-function z-assembly">s</span><span class="z-entity z-name z-function z-assembly"> </span><span class="z-entity z-name z-function z-assembly">c</span><span class="z-entity z-name z-function z-assembly">o</span><span class="z-entity z-name z-function z-assembly">s</span><span class="z-entity z-name z-function z-assembly">t</span><span class="z-entity z-name z-function z-assembly">=</span><span class="z-constant z-character z-decimal z-assembly">1</span>
+</span></code></pre>
+<p>These rules captured:</p>
+<ul>
+<li>The <strong>pattern of DAG operators</strong> (e.g., <code>add</code>, <code>mul</code>, <code>mem[addr]</code>)</li>
+<li>The <strong>target instruction form</strong></li>
+<li><strong>Costs/constraints</strong></li>
+</ul>
+<p>A <strong>rule compiler</strong> (written in Icon!) translated these rules into a <strong>hard-coded instruction selector</strong> (a tree-pattern matcher). The backend became a <strong>monolithic C program</strong>: fast, compact, and specific to the ISA. The same mechanism also supported <strong>peephole optimizations</strong>: rules that rewrote naïve sequences into more efficient ones.</p>
+<p>The frontend and backend communicated via a <strong>tight interface</strong>:</p>
+<ul>
+<li>~17 functions (<code>emit_prologue</code>, <code>emit_data</code>, …)</li>
+<li>A 36-operator DAG language</li>
+</ul>
+<p>This <strong>clean split</strong> made retargeting remarkably easy. To port lcc, you only needed:</p>
+<ol>
+<li>A <strong>configuration file</strong> (data sizes, alignments, calling conventions),</li>
+<li>A few <strong>backend support functions</strong>,</li>
+<li>A <strong>rule set</strong> for code generation.</li>
+</ol>
+<p>Fraser reported that each new target (VAX, MIPS, SPARC, 68020) required only <strong>377–522 lines</strong> of code. That’s a crazy low effort compared to retargeting GCC.</p>
+<p>👉 You can read the original paper here: <a rel="nofollow noreferrer" href="https://dl.acm.org/doi/pdf/10.1145/122616.122621">A Retargetable Compiler for ANSI C (1991)</a>.</p>
+<hr />
+<h2 id="drawbacks-of-fraser-s-approach">Drawbacks of Fraser’s Approach<a class="zola-anchor" href="#drawbacks-of-fraser-s-approach" aria-label="Anchor link for: drawbacks-of-fraser-s-approach" style="visibility: hidden;"></a>
+</h2>
+<p>While lcc was ahead of its time, it also had <strong>serious limitations</strong>. Many of these explain why modern infrastructures like LLVM and MLIR took different paths.</p>
+<ol>
+<li>
+<p><strong>Limited Optimization</strong></p>
+<ul>
+<li>No global optimizations, no SSA, no dataflow analyses.</li>
+<li>Generated code was “good enough” but lagged behind vendor compilers and later GCC/LLVM.</li>
+</ul>
+</li>
+<li>
+<p><strong>Tiny IR (36-operator DAG)</strong></p>
+<ul>
+<li>Too low-level, closer to canonicalized trees than a flexible IR.</li>
+<li>Couldn’t represent advanced optimizations like loop transformations or vectorization.</li>
+</ul>
+</li>
+<li>
+<p><strong>Local Instruction Selection Only</strong></p>
+<ul>
+<li>Rules mapped one DAG at a time → no global instruction scheduling.</li>
+<li>Couldn’t handle complex idioms (e.g., <code>memcpy</code> → <code>rep movsb</code> on x86, delay slots on SPARC).</li>
+</ul>
+</li>
+<li>
+<p><strong>Shallow Retargetability</strong></p>
+<ul>
+<li>Worked well for clean RISC ISAs (MIPS, SPARC, VAX).</li>
+<li>Much harder for “irregular” ISAs like x86, DSPs, or GPUs.</li>
+</ul>
+</li>
+<li>
+<p><strong>Opaque Generated Backends</strong></p>
+<ul>
+<li>The rule compiler produced large monolithic C code.</li>
+<li>Fast, but hard to debug or customize compared to data-driven matchers.</li>
+</ul>
+</li>
+<li>
+<p><strong>Language Lock-In</strong></p>
+<ul>
+<li>Frontend was tightly coupled to ANSI C.</li>
+<li>Couldn’t serve as a general-purpose compiler infrastructure.</li>
+</ul>
+</li>
+<li>
+<p><strong>Didn’t Scale with Hardware Trends</strong></p>
+<ul>
+<li>Built before superscalar, SIMD, multicore, and GPUs became dominant.</li>
+<li>The tiny DAG IR couldn’t express parallelism or vector-level semantics.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="why-it-still-matters">Why It Still Matters<a class="zola-anchor" href="#why-it-still-matters" aria-label="Anchor link for: why-it-still-matters" style="visibility: hidden;"></a>
+</h2>
+<p>Despite its limitations, Fraser’s approach was <strong>visionary</strong>.</p>
+<ul>
+<li>The <strong>declarative rule-based backend</strong> foreshadowed LLVM’s <strong>TableGen</strong>, MLIR’s <strong>ODS</strong>, Cranelift’s <strong>ISLE</strong>, and GNU’s <strong>CGEN</strong>.</li>
+<li>The <strong>tight front–backend interface</strong> showed that <strong>retargeting can be simple</strong> if the abstraction is chosen well.</li>
+<li>The <strong>focus on speed + smallness</strong> influenced generations of lightweight compilers used in embedded systems and education.</li>
+</ul>
+<p>In short: Fraser’s lcc was a <strong>proto-universal compiler</strong>. It wasn’t powerful enough to scale into LLVM, but it proved the idea: <em>source code + machine spec → working compiler backend</em>.</p>
+<hr />
+<h2 id="my-takeaway">My Takeaway<a class="zola-anchor" href="#my-takeaway" aria-label="Anchor link for: my-takeaway" style="visibility: hidden;"></a>
+</h2>
+<p>As I think about building a universal compiler today, Fraser’s work reminds me:</p>
+<ul>
+<li>Keep the <strong>interfaces clean</strong>.</li>
+<li>Automate as much as possible (rule compilers, declarative ISAs).</li>
+<li>Balance <strong>simplicity vs optimization</strong> — you can always add more sophisticated passes later.</li>
+</ul>
+<p>LLVM, MLIR, and even modern DSLs for ISAs (like <a rel="nofollow noreferrer" href="https://ghidra.re/ghidra_docs/languages/html/sleigh.html">SLEIGH in Ghidra</a> or <a rel="nofollow noreferrer" href="https://github.com/riscv/sail-riscv">Sail for formal specs</a>) are essentially “Fraser’s dream, at scale”.</p>
+<p>The journey towards a universal compiler isn’t finished, but lcc shows we’ve been chasing this dream for decades.</p>
+<hr />
+
+      </article>
+
+      
+      
+
+      
+      
+    </div>
+
+    
+
+
+<footer>
+  <div class="left">
+    <div class="copyright">
+      © 2025 Robert K Samuel
+      
+      <span>|</span>
+      Built with <a href="https://www.getzola.org" rel="noreferrer" target="_blank">zola</a> and <a href="https://github.com/isunjn/serene" rel="noreferrer" target="_blank">serene</a>
+      
+    </div>
+  </div>
+
+  <div class="right">
+    
+    
+      
+    
+    
+    <a id="rss-btn" href="https://johnmaxrin.github.io/posts/feed.xml">RSS</a>
+    
+    
+
+    
+    
+    
+    <button id="theme-toggle" aria-label="theme switch">
+      <span class="moon-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path d="M10 7C10 10.866 13.134 14 17 14C18.9584 14 20.729 13.1957 21.9995 11.8995C22 11.933 22 11.9665 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C12.0335 2 12.067 2 12.1005 2.00049C10.8043 3.27098 10 5.04157 10 7ZM4 12C4 16.4183 7.58172 20 12 20C15.0583 20 17.7158 18.2839 19.062 15.7621C18.3945 15.9187 17.7035 16 17 16C12.0294 16 8 11.9706 8 7C8 6.29648 8.08133 5.60547 8.2379 4.938C5.71611 6.28423 4 8.9417 4 12Z" fill="currentColor"></path></svg>
+</span>
+      <span class="sun-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path d="M12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12C18 15.3137 15.3137 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM11 1H13V4H11V1ZM11 20H13V23H11V20ZM3.51472 4.92893L4.92893 3.51472L7.05025 5.63604L5.63604 7.05025L3.51472 4.92893ZM16.9497 18.364L18.364 16.9497L20.4853 19.0711L19.0711 20.4853L16.9497 18.364ZM19.0711 3.51472L20.4853 4.92893L18.364 7.05025L16.9497 5.63604L19.0711 3.51472ZM5.63604 16.9497L7.05025 18.364L4.92893 20.4853L3.51472 19.0711L5.63604 16.9497ZM23 11V13H20V11H23ZM4 11V13H1V11H4Z" fill="currentColor"></path></svg>
+</span>
+    </button>
+    
+  </div>
+</footer>
+
+
+
+
+<dialog id="rss-mask">
+  <div>
+    <a href="https:&#x2F;&#x2F;johnmaxrin.github.io&#x2F;posts&#x2F;feed.xml">https:&#x2F;&#x2F;johnmaxrin.github.io&#x2F;posts&#x2F;feed.xml</a>
+    
+    
+    <button autofocus aria-label="copy" data-link="https:&#x2F;&#x2F;johnmaxrin.github.io&#x2F;posts&#x2F;feed.xml" data-copy-icon="&lt;svg xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2000&#x2F;svg&quot; viewBox=&quot;0 0 24 24&quot; width=&quot;18&quot; height=&quot;18&quot;&gt;&lt;path d=&quot;M6.9998 6V3C6.9998 2.44772 7.44752 2 7.9998 2H19.9998C20.5521 2 20.9998 2.44772 20.9998 3V17C20.9998 17.5523 20.5521 18 19.9998 18H16.9998V20.9991C16.9998 21.5519 16.5499 22 15.993 22H4.00666C3.45059 22 3 21.5554 3 20.9991L3.0026 7.00087C3.0027 6.44811 3.45264 6 4.00942 6H6.9998ZM5.00242 8L5.00019 20H14.9998V8H5.00242ZM8.9998 6H16.9998V16H18.9998V4H8.9998V6Z&quot; fill=&quot;currentColor&quot;&gt;&lt;&#x2F;path&gt;&lt;&#x2F;svg&gt;
+" data-check-icon="&lt;svg xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2000&#x2F;svg&quot; viewBox=&quot;0 0 24 24&quot; width=&quot;18&quot; height=&quot;18&quot;&gt;&lt;path d=&quot;M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z&quot; fill=&quot;currentColor&quot;&gt;&lt;&#x2F;path&gt;&lt;&#x2F;svg&gt;
+" >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path d="M6.9998 6V3C6.9998 2.44772 7.44752 2 7.9998 2H19.9998C20.5521 2 20.9998 2.44772 20.9998 3V17C20.9998 17.5523 20.5521 18 19.9998 18H16.9998V20.9991C16.9998 21.5519 16.5499 22 15.993 22H4.00666C3.45059 22 3 21.5554 3 20.9991L3.0026 7.00087C3.0027 6.44811 3.45264 6 4.00942 6H6.9998ZM5.00242 8L5.00019 20H14.9998V8H5.00242ZM8.9998 6H16.9998V16H18.9998V4H8.9998V6Z" fill="currentColor"></path></svg>
+
+    </button>
+  </div>
+</dialog>
+
+
+
+  </main>
+</div>
+
+  
+<script src="/js/lightense.min.js"></script>
+
+
+  <script src="https://johnmaxrin.github.io/js/main.js"></script>
+</body>
+
+</html>
