@@ -696,7 +696,7 @@ Memory index &lt;code&gt;m&lt;&#x2F;code&gt; = loop index &lt;code&gt;i&lt;&#x2F
 </content>
 	</entry>
 	<entry xml:lang="en">
-		<title>Some Stories Remain Unfinished and Eternally Beautiful 🕊️</title>
+		<title>Some Stories Remain Eternally Beautiful</title>
 		<published>2025-04-21T00:00:00+00:00</published>
 		<updated>2025-04-21T00:00:00+00:00</updated>
 		<link href="https://johnmaxrin.github.io/posts/musings-1/" type="text/html"/>
@@ -758,7 +758,7 @@ First, we need to understand how to deal with arrays in LLVM. We&#x27;ll start s
 </content>
 	</entry>
 	<entry xml:lang="en">
-		<title>Code Transformations and Changing Rooms: An Unexpected Analogy</title>
+		<title>Code Transformations and Changing Rooms</title>
 		<published>2025-03-23T00:00:00+00:00</published>
 		<updated>2025-03-23T00:00:00+00:00</updated>
 		<link href="https://johnmaxrin.github.io/posts/arith2llvm/" type="text/html"/>
