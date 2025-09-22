@@ -1,6 +1,6 @@
 +++
-title = "Some Stories Remain Unfinished and Eternally Beautiful 🕊️"
-description = "MLIR, LLVM & Pointers"
+title = "Some Stories Remain Eternally Beautiful"
+description = "Musings"
 date = 2025-04-21
 draft = false
 template = "post.html"
