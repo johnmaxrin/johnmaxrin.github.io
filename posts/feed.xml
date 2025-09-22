@@ -4,8 +4,50 @@
 	<subtitle>My blog site.</subtitle>
 	<link href="https://johnmaxrin.github.io/posts/feed.xml" rel="self" type="application/atom+xml"/>
     <link href="https://johnmaxrin.github.io/posts/"/>
-	<updated>2025-08-25T00:00:00+00:00</updated>
+	<updated>2025-09-23T00:00:00+00:00</updated>
 	<id>https://johnmaxrin.github.io/posts/feed.xml</id>
+	<entry xml:lang="en">
+		<title>Do We Really Need Smart CPUs?</title>
+		<published>2025-09-23T00:00:00+00:00</published>
+		<updated>2025-09-23T00:00:00+00:00</updated>
+		<link href="https://johnmaxrin.github.io/posts/fully-software-defined-cpu/" type="text/html"/>
+		<id>https://johnmaxrin.github.io/posts/fully-software-defined-cpu/</id>
+		<content type="html">&lt;p&gt;I’ve always wondered: why do we build so many complex features directly into hardware, when software could handle them?&lt;&#x2F;p&gt;
+&lt;p&gt;Take &lt;strong&gt;register renaming&lt;&#x2F;strong&gt; as an example. Modern CPUs add special circuits to handle name conflicts between registers during execution. But what if our compilers were smart enough to generate code that avoided those conflicts in the first place? We wouldn’t need extra hardware just to rename registers.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;why-hardware-became-smart&quot;&gt;Why hardware became &quot;Smart&quot;&lt;a class=&quot;zola-anchor&quot; href=&quot;#why-hardware-became-smart&quot; aria-label=&quot;Anchor link for: why-hardware-became-smart&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h3&gt;
+&lt;p&gt;Over time, CPUs evolved to handle tricky problems automatically:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Out-of-order execution&lt;&#x2F;strong&gt; lets hardware rearrange instructions to keep pipelines full.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Branch prediction&lt;&#x2F;strong&gt; tries to guess the future to avoid stalls.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Caches&lt;&#x2F;strong&gt; hide memory latency.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;All of this makes CPUs faster, but also incredibly complex and power-hungry.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;what-if-hardware-stayed-simple&quot;&gt;What if hardware stayed simple?&lt;a class=&quot;zola-anchor&quot; href=&quot;#what-if-hardware-stayed-simple&quot; aria-label=&quot;Anchor link for: what-if-hardware-stayed-simple&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h3&gt;
+&lt;p&gt;Now imagine flipping this around: the CPU is &lt;strong&gt;dumb but fast&lt;&#x2F;strong&gt;, and the &lt;strong&gt;software is smart&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;This isn’t just a fantasy. There are real-world hints of it:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;VLIW (Very Long Instruction Word)&lt;&#x2F;strong&gt; machines, like Intel’s Itanium, tried moving scheduling decisions to the compiler.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Interpreters and JIT compilers&lt;&#x2F;strong&gt; (like the JVM or JavaScript engines) already generate optimized code on the fly, sometimes beating hardware predictions.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Software-managed caches&lt;&#x2F;strong&gt; exist in some GPUs and embedded processors, where programmers explicitly move data in and out of scratchpad memory.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;As ISAs grew more complex, their interactions and cost models became very hard to manage. This is one big reason why attempts like VLIW struggled to gain wide adoption. &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Itanium&quot;&gt;Itanium&lt;&#x2F;a&gt;, for example, failed because writing compilers that could make VLIW efficient was likely beyond human capability. Donald Knuth himself remarked that compilers capable of making it perform even reasonably were nearly impossible to write.&lt;&#x2F;p&gt;
+&lt;p&gt;Recent research shows that this compiler barrier may no longer be insurmountable. For example, &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;publish.illinois.edu&#x2F;hpvm-project&#x2F;files&#x2F;2025&#x2F;04&#x2F;Towards_Automatic_Generation_of_Efficient_Retargetable_Semantic_Driven_Optimizations-10.pdf&quot;&gt;MISAAL&lt;&#x2F;a&gt; is a synthesis-based compiler that uses formal understanding of hardware instructions to automatically generate highly optimized code. It handles complex modern instructions quickly, something once considered impossible for humans alone. This demonstrates that with smarter, automated compilers, software could realistically take on many of the tasks that hardware currently handles. Now imagine what could be possible if we designed a CPU from the ground up with software-first thinking. Hardware could stay minimal and predictable, while the compilers, runtimes, even AI-assisted code generators handles execution, memory management, and scheduling intelligently.&lt;&#x2F;p&gt;
+&lt;p&gt;Instead of patching over decades of legacy ISA baggage, we could redefine the contract between hardware and software. The CPU would no longer need to be &quot;smart&quot; if the software stack is powerful enough to manage complexity efficiently. This is the vision of a fully software-defined CPU.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;why-this-idea-matters&quot;&gt;Why this idea matters&lt;a class=&quot;zola-anchor&quot; href=&quot;#why-this-idea-matters&quot; aria-label=&quot;Anchor link for: why-this-idea-matters&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h3&gt;
+&lt;p&gt;If we push more intelligence into compilers and runtimes, CPUs could become simpler, cheaper, and more energy-efficient. We would rely on smarter software to:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;schedule instructions,&lt;&#x2F;li&gt;
+&lt;li&gt;manage registers,&lt;&#x2F;li&gt;
+&lt;li&gt;optimize memory access,&lt;&#x2F;li&gt;
+&lt;li&gt;even decide execution order.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;It is not easy. Predicting the unpredictable is still the biggest challenge. But if we succeed, we could build a &lt;strong&gt;fully software-defined CPU&lt;&#x2F;strong&gt;, where hardware is just a basic engine and software does all the heavy lifting.&lt;&#x2F;p&gt;
+&lt;p&gt;What do you think, could this really be the future of computing? Let me &lt;a href=&quot;mailto:60b36t@gmail.com&quot;&gt;know&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>Towards a Universal Compiler</title>
 		<published>2025-08-25T00:00:00+00:00</published>
