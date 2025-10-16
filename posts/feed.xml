@@ -104,6 +104,8 @@ Add print statements, assertions, or custom messages directly into MLIR and see 
 &lt;blockquote&gt;
 &lt;p&gt;Think of Arey as your IR’s &lt;strong&gt;printf debugger&lt;&#x2F;strong&gt; but cleaner and compiler-aware.&lt;&#x2F;p&gt;
 &lt;&#x2F;blockquote&gt;
+&lt;h2 id=&quot;get-arey-dialect&quot;&gt;Get &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;johnmaxrin&#x2F;arey&#x2F;releases&#x2F;tag&#x2F;v0.1.0&quot;&gt;Arey Dialect&lt;&#x2F;a&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#get-arey-dialect&quot; aria-label=&quot;Anchor link for: get-arey-dialect&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
 </content>
 	</entry>
 	<entry xml:lang="en">
