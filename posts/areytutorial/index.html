@@ -192,7 +192,7 @@
 <li><code>arey.print_str</code> — print a constant string</li>
 <li><code>arey.assert</code> — assert conditions on runtime values</li>
 </ul>
-<p>Think of it as <strong>printf debugging for your IR</strong> — a lightweight way to peek into runtime behavior before full lowering.</p>
+<p>Think of it as <strong>printf debugging for your IR</strong>, A lightweight way to peek into runtime behavior before full lowering.</p>
 <hr />
 <h2 id="example-matrix-multiplication">Example: Matrix Multiplication<a class="zola-anchor" href="#example-matrix-multiplication" aria-label="Anchor link for: example-matrix-multiplication" style="visibility: hidden;"></a>
 </h2>
@@ -225,7 +225,7 @@
 <hr />
 <h2 id="adding-arey-instrumentation">Adding Arey Instrumentation<a class="zola-anchor" href="#adding-arey-instrumentation" aria-label="Anchor link for: adding-arey-instrumentation" style="visibility: hidden;"></a>
 </h2>
-<p>Let’s say you want to check what <code>%2</code> is at runtime, or ensure <code>%arg0</code> equals 1000.
+<p>Let’s say you want to check what <code>%2</code> is at runtime, or ensure <code>%arg0</code> equals 1000 or simply want to print <code>Hello World</code>
 You can easily do that with Arey ops:</p>
 <pre data-lang="mlir" class="language-mlir z-code"><code class="language-mlir" data-lang="mlir"><span class="z-text z-plain">arey.assert %arg0 : i32 eq 1000
 </span><span class="z-text z-plain">arey.print %2 : index
@@ -256,20 +256,6 @@ You can easily do that with Arey ops:</p>
 </h2>
 <p>Once you’re done instrumenting, simply run the conversion pass:</p>
 <pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">--convert-arey-to-llvm</span></span>
-</span></code></pre>
-<p>This lowers all Arey ops to LLVM IR, generating the corresponding runtime calls (<code>printf</code>, <code>abort</code>, etc.).
-For example, <code>arey.print</code> becomes:</p>
-<pre data-lang="llvm" class="language-llvm z-code"><code class="language-llvm" data-lang="llvm"><span class="z-text z-plain">%fmt = llvm.mlir.addressof @print_format : !llvm.ptr
-</span><span class="z-text z-plain">%val = arith.index_cast %2 : index to i64
-</span><span class="z-text z-plain">llvm.call @printf(%fmt, %val) vararg(!llvm.func&lt;i32 (ptr, ...)&gt;) : (!llvm.ptr, i64) -&gt; i32
-</span></code></pre>
-<p>and <code>arey.assert</code> lowers to:</p>
-<pre data-lang="llvm" class="language-llvm z-code"><code class="language-llvm" data-lang="llvm"><span class="z-text z-plain">%cond = llvm.icmp &quot;eq&quot; %arg0, %7 : i32
-</span><span class="z-text z-plain">llvm.cond_br %cond, ^ok, ^fail
-</span><span class="z-text z-plain">^fail:
-</span><span class="z-text z-plain">  llvm.call @printf(@assertMsg)
-</span><span class="z-text z-plain">  llvm.call @abort()
-</span><span class="z-text z-plain">  llvm.unreachable
 </span></code></pre>
 <hr />
 <h2 id="why-use-arey">Why Use Arey?<a class="zola-anchor" href="#why-use-arey" aria-label="Anchor link for: why-use-arey" style="visibility: hidden;"></a>
