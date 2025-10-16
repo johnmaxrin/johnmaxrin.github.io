@@ -103,10 +103,10 @@ Once you’re done instrumenting, simply run the conversion pass:
 
 ## Why Use Arey?
 
-✅ Easy to debug MLIR at runtime
-✅ No need to hand-write printf lowering
-✅ Fully compatible with LLVM lowering
-✅ Great for teaching, research, and debugging custom passes
+- Easy to debug MLIR at runtime
+- No need to hand-write printf lowering
+- Fully compatible with LLVM lowering
+- Great for teaching, research, and debugging custom passes
 
 ---
 
