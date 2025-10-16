@@ -19,7 +19,7 @@ The Arey dialect provides utility operations such as:
 * `arey.print_str` — print a constant string
 * `arey.assert` — assert conditions on runtime values
 
-Think of it as **printf debugging for your IR** — a lightweight way to peek into runtime behavior before full lowering.
+Think of it as **printf debugging for your IR**, A lightweight way to peek into runtime behavior before full lowering.
 
 ---
 
@@ -58,7 +58,7 @@ module {
 
 ## Adding Arey Instrumentation
 
-Let’s say you want to check what `%2` is at runtime, or ensure `%arg0` equals 1000.
+Let’s say you want to check what `%2` is at runtime, or ensure `%arg0` equals 1000 or simply want to print `Hello World`
 You can easily do that with Arey ops:
 
 ```mlir
@@ -99,27 +99,6 @@ Once you’re done instrumenting, simply run the conversion pass:
 ```bash
 --convert-arey-to-llvm
 ```
-
-This lowers all Arey ops to LLVM IR, generating the corresponding runtime calls (`printf`, `abort`, etc.).
-For example, `arey.print` becomes:
-
-```llvm
-%fmt = llvm.mlir.addressof @print_format : !llvm.ptr
-%val = arith.index_cast %2 : index to i64
-llvm.call @printf(%fmt, %val) vararg(!llvm.func<i32 (ptr, ...)>) : (!llvm.ptr, i64) -> i32
-```
-
-and `arey.assert` lowers to:
-
-```llvm
-%cond = llvm.icmp "eq" %arg0, %7 : i32
-llvm.cond_br %cond, ^ok, ^fail
-^fail:
-  llvm.call @printf(@assertMsg)
-  llvm.call @abort()
-  llvm.unreachable
-```
-
 ---
 
 ## Why Use Arey?
