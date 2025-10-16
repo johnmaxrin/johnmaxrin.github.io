@@ -4,8 +4,120 @@
 	<subtitle>My blog site.</subtitle>
 	<link href="https://johnmaxrin.github.io/posts/feed.xml" rel="self" type="application/atom+xml"/>
     <link href="https://johnmaxrin.github.io/posts/"/>
-	<updated>2025-09-23T00:00:00+00:00</updated>
+	<updated>2025-10-16T00:00:00+00:00</updated>
 	<id>https://johnmaxrin.github.io/posts/feed.xml</id>
+	<entry xml:lang="en">
+		<title>Instrument Your MLIR Code with the Arey Dialect </title>
+		<published>2025-10-16T00:00:00+00:00</published>
+		<updated>2025-10-16T00:00:00+00:00</updated>
+		<link href="https://johnmaxrin.github.io/posts/areytutorial/" type="text/html"/>
+		<id>https://johnmaxrin.github.io/posts/areytutorial/</id>
+		<content type="html">&lt;p&gt;Debugging MLIR code can be tricky. The &lt;strong&gt;Arey dialect&lt;&#x2F;strong&gt; helps you instrument your IR with simple operations like printing values or checking assertions making your life much easier when hunting down bugs in your compiler passes.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;what-is-the-arey-dialect&quot;&gt;What Is the Arey Dialect?&lt;a class=&quot;zola-anchor&quot; href=&quot;#what-is-the-arey-dialect&quot; aria-label=&quot;Anchor link for: what-is-the-arey-dialect&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;The Arey dialect provides utility operations such as:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;arey.print&lt;&#x2F;code&gt; — print runtime values&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;arey.print_str&lt;&#x2F;code&gt; — print a constant string&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;arey.assert&lt;&#x2F;code&gt; — assert conditions on runtime values&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Think of it as &lt;strong&gt;printf debugging for your IR&lt;&#x2F;strong&gt; — a lightweight way to peek into runtime behavior before full lowering.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;example-matrix-multiplication&quot;&gt;Example: Matrix Multiplication&lt;a class=&quot;zola-anchor&quot; href=&quot;#example-matrix-multiplication&quot; aria-label=&quot;Anchor link for: example-matrix-multiplication&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;Suppose your MLIR code looks like this:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;mlir&quot; class=&quot;language-mlir z-code&quot;&gt;&lt;code class=&quot;language-mlir&quot; data-lang=&quot;mlir&quot;&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;module {
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;  func.func @matmul(%arg0: i32, %arg1: i32, %arg2: i32,
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;                    %arg3: memref&amp;lt;?x128xf32&amp;gt;, %arg4: memref&amp;lt;?x128xf32&amp;gt;, %arg5: memref&amp;lt;?x128xf32&amp;gt;) {
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;    %cst = arith.constant 0.0 : f32
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;    %0 = arith.index_cast %arg0 : i32 to index
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;    %1 = arith.index_cast %arg1 : i32 to index
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;    %2 = arith.index_cast %arg2 : i32 to index
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;    affine.for %i = 0 to 128 {
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;      affine.for %j = 0 to 128 {
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;        affine.store %cst, %arg5[%i, %j] : memref&amp;lt;?x128xf32&amp;gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;        affine.for %k = 0 to 128 {
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;          %a = affine.load %arg3[%i, %k] : memref&amp;lt;?x128xf32&amp;gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;          %b = affine.load %arg4[%k, %j] : memref&amp;lt;?x128xf32&amp;gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;          %p = arith.mulf %a, %b : f32
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;          %c = affine.load %arg5[%i, %j] : memref&amp;lt;?x128xf32&amp;gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;          %r = arith.addf %c, %p : f32
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;          affine.store %r, %arg5[%i, %j] : memref&amp;lt;?x128xf32&amp;gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;        }
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;      }
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;    }
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;    return
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;  }
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;adding-arey-instrumentation&quot;&gt;Adding Arey Instrumentation&lt;a class=&quot;zola-anchor&quot; href=&quot;#adding-arey-instrumentation&quot; aria-label=&quot;Anchor link for: adding-arey-instrumentation&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;Let’s say you want to check what &lt;code&gt;%2&lt;&#x2F;code&gt; is at runtime, or ensure &lt;code&gt;%arg0&lt;&#x2F;code&gt; equals 1000.
+You can easily do that with Arey ops:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;mlir&quot; class=&quot;language-mlir z-code&quot;&gt;&lt;code class=&quot;language-mlir&quot; data-lang=&quot;mlir&quot;&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;arey.assert %arg0 : i32 eq 1000
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;arey.print %2 : index
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;arey.print_str &amp;quot;Hello World&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Resulting instrumented IR:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;mlir&quot; class=&quot;language-mlir z-code&quot;&gt;&lt;code class=&quot;language-mlir&quot; data-lang=&quot;mlir&quot;&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;module {
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;  func.func @matmul(%arg0: i32, %arg1: i32, %arg2: i32,
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;                    %arg3: memref&amp;lt;?x128xf32&amp;gt;, %arg4: memref&amp;lt;?x128xf32&amp;gt;, %arg5: memref&amp;lt;?x128xf32&amp;gt;) {
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;    %cst = arith.constant 0.0 : f32
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;    %0 = arith.index_cast %arg0 : i32 to index
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;    %1 = arith.index_cast %arg1 : i32 to index
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;    %2 = arith.index_cast %arg2 : i32 to index
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;    arey.assert %arg0 : i32 eq 1000
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;    arey.print %2 : index
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;    affine.for %i = 0 to 128 {
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;      arey.print_str &amp;quot;Hello World&amp;quot;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;      ...
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;    }
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;    return
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;  }
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;lowering-to-llvm&quot;&gt;Lowering to LLVM&lt;a class=&quot;zola-anchor&quot; href=&quot;#lowering-to-llvm&quot; aria-label=&quot;Anchor link for: lowering-to-llvm&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;Once you’re done instrumenting, simply run the conversion pass:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; class=&quot;language-bash z-code&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;z-source z-shell z-bash&quot;&gt;&lt;span class=&quot;z-meta z-function-call z-shell&quot;&gt;&lt;span class=&quot;z-variable z-function z-shell&quot;&gt;--convert-arey-to-llvm&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This lowers all Arey ops to LLVM IR, generating the corresponding runtime calls (&lt;code&gt;printf&lt;&#x2F;code&gt;, &lt;code&gt;abort&lt;&#x2F;code&gt;, etc.).
+For example, &lt;code&gt;arey.print&lt;&#x2F;code&gt; becomes:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;llvm&quot; class=&quot;language-llvm z-code&quot;&gt;&lt;code class=&quot;language-llvm&quot; data-lang=&quot;llvm&quot;&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;%fmt = llvm.mlir.addressof @print_format : !llvm.ptr
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;%val = arith.index_cast %2 : index to i64
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;llvm.call @printf(%fmt, %val) vararg(!llvm.func&amp;lt;i32 (ptr, ...)&amp;gt;) : (!llvm.ptr, i64) -&amp;gt; i32
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;and &lt;code&gt;arey.assert&lt;&#x2F;code&gt; lowers to:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;llvm&quot; class=&quot;language-llvm z-code&quot;&gt;&lt;code class=&quot;language-llvm&quot; data-lang=&quot;llvm&quot;&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;%cond = llvm.icmp &amp;quot;eq&amp;quot; %arg0, %7 : i32
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;llvm.cond_br %cond, ^ok, ^fail
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;^fail:
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;  llvm.call @printf(@assertMsg)
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;  llvm.call @abort()
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;  llvm.unreachable
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;why-use-arey&quot;&gt;Why Use Arey?&lt;a class=&quot;zola-anchor&quot; href=&quot;#why-use-arey&quot; aria-label=&quot;Anchor link for: why-use-arey&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;✅ Easy to debug MLIR at runtime
+✅ No need to hand-write printf lowering
+✅ Fully compatible with LLVM lowering
+✅ Great for teaching, research, and debugging custom passes&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;tl-dr&quot;&gt;TL;DR&lt;a class=&quot;zola-anchor&quot; href=&quot;#tl-dr&quot; aria-label=&quot;Anchor link for: tl-dr&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;The &lt;strong&gt;Arey dialect&lt;&#x2F;strong&gt; is your IR-level debugging toolkit.
+Add print statements, assertions, or custom messages directly into MLIR and see them reflected in your lowered LLVM IR.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Think of Arey as your IR’s &lt;strong&gt;printf debugger&lt;&#x2F;strong&gt; but cleaner and compiler-aware.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>Do We Really Need Smart CPUs?</title>
 		<published>2025-09-23T00:00:00+00:00</published>
