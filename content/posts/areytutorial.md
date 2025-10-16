@@ -117,3 +117,7 @@ Add print statements, assertions, or custom messages directly into MLIR and see 
 
 > Think of Arey as your IR’s **printf debugger** but cleaner and compiler-aware.
 
+
+## Get [Arey Dialect](https://github.com/johnmaxrin/arey/releases/tag/v0.1.0)
+
+
