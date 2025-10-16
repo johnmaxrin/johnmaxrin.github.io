@@ -90,10 +90,12 @@ You can easily do that with Arey ops:&lt;&#x2F;p&gt;
 &lt;hr &#x2F;&gt;
 &lt;h2 id=&quot;why-use-arey&quot;&gt;Why Use Arey?&lt;a class=&quot;zola-anchor&quot; href=&quot;#why-use-arey&quot; aria-label=&quot;Anchor link for: why-use-arey&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
 &lt;&#x2F;h2&gt;
-&lt;p&gt;✅ Easy to debug MLIR at runtime
-✅ No need to hand-write printf lowering
-✅ Fully compatible with LLVM lowering
-✅ Great for teaching, research, and debugging custom passes&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Easy to debug MLIR at runtime&lt;&#x2F;li&gt;
+&lt;li&gt;No need to hand-write printf lowering&lt;&#x2F;li&gt;
+&lt;li&gt;Fully compatible with LLVM lowering&lt;&#x2F;li&gt;
+&lt;li&gt;Great for teaching, research, and debugging custom passes&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
 &lt;hr &#x2F;&gt;
 &lt;h2 id=&quot;tl-dr&quot;&gt;TL;DR&lt;a class=&quot;zola-anchor&quot; href=&quot;#tl-dr&quot; aria-label=&quot;Anchor link for: tl-dr&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
 &lt;&#x2F;h2&gt;
