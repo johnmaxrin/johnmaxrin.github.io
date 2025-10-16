@@ -1,0 +1,17 @@
+[[collection]]
+type = "card_simple"
+title = "IIT Madras"
+icon = "/img/iitmlogo.svg"
+link = "https://www.iitm.ac.in/"
+content = "Masters in Computer Science"
+date = "2024 - Present"
+
+[[collection]]
+type = "card_simple"
+title = "KTU AJCE"
+icon = "/img/ktulogo.png"
+link = "https://ktu.edu.in/"
+content = "Bachelors in Information Technology"
+date = "2018"
+
+
