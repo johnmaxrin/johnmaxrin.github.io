@@ -4,8 +4,18 @@
 	<subtitle>Here’s a glimpse of what I’ve been up to lately.</subtitle>
 	<link href="https://johnmaxrin.github.io/news/feed.xml" rel="self" type="application/atom+xml"/>
     <link href="https://johnmaxrin.github.io/news/"/>
-	<updated>2025-09-28T00:00:00+00:00</updated>
+	<updated>2025-10-23T00:00:00+00:00</updated>
 	<id>https://johnmaxrin.github.io/news/feed.xml</id>
+	<entry xml:lang="en">
+		<title>MLIR Primer: Guest Lecture at IIT Madras</title>
+		<published>2025-10-23T00:00:00+00:00</published>
+		<updated>2025-10-23T00:00:00+00:00</updated>
+		<link href="https://johnmaxrin.github.io/news/mlir-primer/" type="text/html"/>
+		<id>https://johnmaxrin.github.io/news/mlir-primer/</id>
+		<content type="html">&lt;p&gt;I had the opportunity to deliver a &lt;strong&gt;guest lecture at IIT Madras&lt;&#x2F;strong&gt; on the topic &lt;strong&gt;“MLIR Primer”&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;📑 &lt;strong&gt;Slides:&lt;&#x2F;strong&gt; &lt;a href=&quot;&#x2F;pdfs&#x2F;MLIR_Primer.pdf&quot;&gt;Download &#x2F; View here&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>Segfault Compiler Hackathon Finalist</title>
 		<published>2025-09-28T00:00:00+00:00</published>
@@ -16,17 +26,6 @@
 &lt;p&gt;This dialect makes it easier to observe and analyze transformations across different stages of the MLIR pipeline, helping developers better understand and debug their conversions&#x2F;transformations.&lt;&#x2F;p&gt;
 &lt;p&gt;It was an incredible experience to showcase this work and exchange ideas with the community.&lt;&#x2F;p&gt;
 &lt;p&gt;👉 You can explore the project here: &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;johnmaxrin&#x2F;arey&quot;&gt;Arey Dialect&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
-</content>
-	</entry>
-	<entry xml:lang="en">
-		<title>Guest Lecture at IIT Madras</title>
-		<published>2025-09-23T00:00:00+00:00</published>
-		<updated>2025-09-23T00:00:00+00:00</updated>
-		<link href="https://johnmaxrin.github.io/news/mlir-primer/" type="text/html"/>
-		<id>https://johnmaxrin.github.io/news/mlir-primer/</id>
-		<content type="html">&lt;p&gt;I had the opportunity to deliver a &lt;strong&gt;guest lecture at IIT Madras&lt;&#x2F;strong&gt; on the topic &lt;strong&gt;“MLIR Primer”&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
-&lt;p&gt;It was a pleasure to interact with the students and faculty, discussing compiler infrastructure, intermediate representations, and the evolving MLIR ecosystem.&lt;&#x2F;p&gt;
-&lt;p&gt;📑 &lt;strong&gt;Slides:&lt;&#x2F;strong&gt; &lt;a href=&quot;&#x2F;pdfs&#x2F;MLIR_Primer.pdf&quot;&gt;Download &#x2F; View here&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 </content>
 	</entry>
 	<entry xml:lang="en">
