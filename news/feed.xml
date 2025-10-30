@@ -19,6 +19,17 @@
 </content>
 	</entry>
 	<entry xml:lang="en">
+		<title>Guest Lecture at IIT Madras</title>
+		<published>2025-09-23T00:00:00+00:00</published>
+		<updated>2025-09-23T00:00:00+00:00</updated>
+		<link href="https://johnmaxrin.github.io/news/mlir-primer/" type="text/html"/>
+		<id>https://johnmaxrin.github.io/news/mlir-primer/</id>
+		<content type="html">&lt;p&gt;I had the opportunity to deliver a &lt;strong&gt;guest lecture at IIT Madras&lt;&#x2F;strong&gt; on the topic &lt;strong&gt;“MLIR Primer”&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;It was a pleasure to interact with the students and faculty, discussing compiler infrastructure, intermediate representations, and the evolving MLIR ecosystem.&lt;&#x2F;p&gt;
+&lt;p&gt;📑 &lt;strong&gt;Slides:&lt;&#x2F;strong&gt; &lt;a href=&quot;&#x2F;pdfs&#x2F;MLIR_Primer.pdf&quot;&gt;Download &#x2F; View here&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
 		<title>Presented at PLDI 2025 SRC and Received PLMW Scholarship</title>
 		<published>2025-06-18T00:00:00+00:00</published>
 		<updated>2025-06-18T00:00:00+00:00</updated>

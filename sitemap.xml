@@ -17,6 +17,10 @@
         <loc>https://johnmaxrin.github.io/news/</loc>
     </url>
     <url>
+        <loc>https://johnmaxrin.github.io/news/mlir-primer/</loc>
+        <lastmod>2025-09-23</lastmod>
+    </url>
+    <url>
         <loc>https://johnmaxrin.github.io/news/pldi-25-src/</loc>
         <lastmod>2025-06-18</lastmod>
     </url>
