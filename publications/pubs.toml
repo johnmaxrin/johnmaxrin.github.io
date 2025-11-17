@@ -1,6 +1,11 @@
 [[collection]]
-type = "entry"
-icon = "https://avatars.githubusercontent.com/u/817898?v=4"
-link = "https://github.com/DoctorWkt/acwj"
-title = "A Compiler Writing Journey"
-subtitle = "Warren"
+type = "card"
+feature = true
+link = "https://drive.google.com/file/d/1o6xTgSPo4RkoSMKpcUsdXGNzF4W0x7y1/view?usp=drive_link"
+title = "Scalable XML Parsing and XPath Querying with Regular Expression Support"
+subtitle = "Robert K Samuel, Rupesh Nasre"
+content = """\
+Data sizes are growing rapidly, making XML processing increasingly slow at large scales. Although XML remains a popular structured data format, existing tools struggle with long parsing and query times. We introduce a parallel XML parser and query engine that can handle complex XPath patterns, including regular expressions and Kleene closures. Our approach overcomes the sequential and memory challenges of traditional XML processing. Experiments show significant performance improvements over libXML, reaching over 32× speedup.
+
+*[HiPC 2025] Accepted, Distinguished Paper Nominee 🏆*
+"""
