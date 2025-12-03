@@ -4,8 +4,42 @@
 	<subtitle>My blog site.</subtitle>
 	<link href="https://johnmaxrin.github.io/posts/feed.xml" rel="self" type="application/atom+xml"/>
     <link href="https://johnmaxrin.github.io/posts/"/>
-	<updated>2025-10-16T00:00:00+00:00</updated>
+	<updated>2025-11-03T00:00:00+00:00</updated>
 	<id>https://johnmaxrin.github.io/posts/feed.xml</id>
+	<entry xml:lang="en">
+		<title>Distributed Heterogeneous IR</title>
+		<published>2025-11-03T00:00:00+00:00</published>
+		<updated>2025-11-03T00:00:00+00:00</updated>
+		<link href="https://johnmaxrin.github.io/posts/dhir/" type="text/html"/>
+		<id>https://johnmaxrin.github.io/posts/dhir/</id>
+		<content type="html">&lt;h1 id=&quot;the-challenge&quot;&gt;The Challenge&lt;a class=&quot;zola-anchor&quot; href=&quot;#the-challenge&quot; aria-label=&quot;Anchor link for: the-challenge&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h1&gt;
+&lt;p&gt;Modern computing is increasingly heterogeneous. Your laptop has a CPU and maybe a GPU. Data centers have CPUs, GPUs, TPUs, and specialized accelerators. High-performance computing clusters combine all of these across multiple nodes connected by high-speed networks.&lt;&#x2F;p&gt;
+&lt;p&gt;Writing programs that efficiently utilize this heterogeneous hardware is incredibly challenging. You need to:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Partition your computation across different devices&lt;&#x2F;li&gt;
+&lt;li&gt;Express parallelism within each device (threads, CUDA blocks, MPI ranks)&lt;&#x2F;li&gt;
+&lt;li&gt;Move data between devices efficiently&lt;&#x2F;li&gt;
+&lt;li&gt;Coordinate execution and handle dependencies&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Traditionally, this means writing tangled code mixing MPI, OpenMP, CUDA, and custom communication logic. It&#x27;s error-prone, hard to maintain, and difficult to port to new hardware configurations.&lt;&#x2F;p&gt;
+&lt;p&gt;This is what DHIR is solving. DHIR (Distributed Heterogeneous Intermediate Representation) is an MLIR dialect for expressing distributed, heterogeneous computations as tasks that can execute across CPUs, GPUs, and distributed systems.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;core-concepts&quot;&gt;Core Concepts&lt;a class=&quot;zola-anchor&quot; href=&quot;#core-concepts&quot; aria-label=&quot;Anchor link for: core-concepts&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;tasks&quot;&gt;Tasks&lt;a class=&quot;zola-anchor&quot; href=&quot;#tasks&quot; aria-label=&quot;Anchor link for: tasks&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;Tasks are the fundamental unit of computation in DHIR, analogous to functions in C&#x2F;C++. Each task:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Encapsulates a specific computation&lt;&#x2F;li&gt;
+&lt;li&gt;Has explicit inputs and outputs&lt;&#x2F;li&gt;
+&lt;li&gt;Can be scheduled for execution on different devices&lt;&#x2F;li&gt;
+&lt;li&gt;Contains parallelism information&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;schedule&quot;&gt;Schedule&lt;a class=&quot;zola-anchor&quot; href=&quot;#schedule&quot; aria-label=&quot;Anchor link for: schedule&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;Just like the main function.&lt;&#x2F;p&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>Instrument Your MLIR Code with the Arey Dialect </title>
 		<published>2025-10-16T00:00:00+00:00</published>

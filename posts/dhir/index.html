@@ -10,9 +10,9 @@
   
     
   
-  <meta name="description" content="My blog site.">
+  <meta name="description" content="MLIR, LLVM, HPC">
 
-  <title>Research</title>
+  <title>Distributed Heterogeneous IR</title>
   <link rel="icon" type="image/png" sizes="32x32" href="https://johnmaxrin.github.io/img/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="https://johnmaxrin.github.io/img/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="https://johnmaxrin.github.io/img/apple-touch-icon.png">
@@ -109,17 +109,24 @@
       <ul>
         
         <li>
-          <a class="h2" href="#distributed-heterogeneous-computing">Distributed Heterogeneous Computing</a>
+          <a class="h2" href="#the-challenge">The Challenge</a>
           
         </li>
         
         <li>
-          <a class="h2" href="#starplat-milr">StarPlat MILR</a>
+          <a class="h2" href="#core-concepts">Core Concepts</a>
           
-        </li>
-        
-        <li>
-          <a class="h2" href="#debug-dialect">Debug Dialect</a>
+          <ul>
+            
+            <li>
+              <a class="h3" href="#tasks">Tasks</a>
+            </li>
+            
+            <li>
+              <a class="h3" href="#schedule">Schedule</a>
+            </li>
+            
+          </ul>
           
         </li>
         
@@ -153,10 +160,10 @@
 "></div>
       
       <article class="prose">
-        <h1>Research</h1>
+        <h1>Distributed Heterogeneous IR</h1>
         <div id="post-info">
           <div id="date">
-            <span id="publish">May 5, 2025</span>
+            <span id="publish">Nov 3, 2025</span>
             </div>
 
           
@@ -167,26 +174,32 @@
 
         
 
-        <h3 id="distributed-heterogeneous-computing">Distributed Heterogeneous Computing</h3>
-<p>I work on making it easier to build compilers for supercomputers. Today, if you are developing a domain-specific language (DSL) or a compiler, supporting distributed and heterogeneous systems usually means writing a lot of low-level code for synchronization, communication, and device-specific details.</p>
-<p>To address this, I designed a new <strong>intermediate representation (IR)</strong> called <strong>DHIR</strong>.</p>
+        <h1 id="the-challenge">The Challenge<a class="zola-anchor" href="#the-challenge" aria-label="Anchor link for: the-challenge" style="visibility: hidden;"></a>
+</h1>
+<p>Modern computing is increasingly heterogeneous. Your laptop has a CPU and maybe a GPU. Data centers have CPUs, GPUs, TPUs, and specialized accelerators. High-performance computing clusters combine all of these across multiple nodes connected by high-speed networks.</p>
+<p>Writing programs that efficiently utilize this heterogeneous hardware is incredibly challenging. You need to:</p>
 <ul>
-<li><strong>DHIR is built on MLIR</strong> and acts as a <strong>middleware IR</strong> between high-level dialects (like SCF, Affine etc) and low-level hardware IRs (such as LLVM IR).</li>
-<li>It provides a structured way to represent <strong>distributed heterogeneous execution</strong>, so compiler developers don’t need to manually insert synchronization or communication.</li>
-<li>The infrastructure automatically takes care of:
+<li>Partition your computation across different devices</li>
+<li>Express parallelism within each device (threads, CUDA blocks, MPI ranks)</li>
+<li>Move data between devices efficiently</li>
+<li>Coordinate execution and handle dependencies</li>
+</ul>
+<p>Traditionally, this means writing tangled code mixing MPI, OpenMP, CUDA, and custom communication logic. It's error-prone, hard to maintain, and difficult to port to new hardware configurations.</p>
+<p>This is what DHIR is solving. DHIR (Distributed Heterogeneous Intermediate Representation) is an MLIR dialect for expressing distributed, heterogeneous computations as tasks that can execute across CPUs, GPUs, and distributed systems.</p>
+<h1 id="core-concepts">Core Concepts<a class="zola-anchor" href="#core-concepts" aria-label="Anchor link for: core-concepts" style="visibility: hidden;"></a>
+</h1>
+<h2 id="tasks">Tasks<a class="zola-anchor" href="#tasks" aria-label="Anchor link for: tasks" style="visibility: hidden;"></a>
+</h2>
+<p>Tasks are the fundamental unit of computation in DHIR, analogous to functions in C/C++. Each task:</p>
 <ul>
-<li>Respecting <strong>dependencies</strong></li>
-<li>Inserting <strong>synchronization</strong></li>
-<li>Handling <strong>data movement and communication primitives</strong></li>
+<li>Encapsulates a specific computation</li>
+<li>Has explicit inputs and outputs</li>
+<li>Can be scheduled for execution on different devices</li>
+<li>Contains parallelism information</li>
 </ul>
-</li>
-</ul>
-<p>This means DSL and compiler developers can focus on the <strong>semantics of their language</strong>, while DHIR handles the <strong>system-level concerns</strong> of mapping to distributed, heterogeneous machines.</p>
-<p>👉 You can find the code here: <a rel="nofollow noreferrer" href="https://github.com/johnmaxrin/avial">DHIR Repository</a></p>
-<h2 id="starplat-milr">StarPlat MILR</h2>
-<p>Working on it ...</p>
-<h2 id="debug-dialect">Debug Dialect</h2>
-<p>Working on it ...</p>
+<h2 id="schedule">Schedule<a class="zola-anchor" href="#schedule" aria-label="Anchor link for: schedule" style="visibility: hidden;"></a>
+</h2>
+<p>Just like the main function.</p>
 
       </article>
 
