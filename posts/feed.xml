@@ -38,6 +38,9 @@
 &lt;h2 id=&quot;schedule&quot;&gt;Schedule&lt;a class=&quot;zola-anchor&quot; href=&quot;#schedule&quot; aria-label=&quot;Anchor link for: schedule&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
 &lt;&#x2F;h2&gt;
 &lt;p&gt;Just like the main function.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;system-config-json&quot;&gt;&lt;code&gt;system_config.json&lt;&#x2F;code&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#system-config-json&quot; aria-label=&quot;Anchor link for: system-config-json&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;Helps in defining the distributed system that you have.&lt;&#x2F;p&gt;
 </content>
 	</entry>
 	<entry xml:lang="en">
