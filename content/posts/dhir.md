@@ -31,4 +31,7 @@ Tasks are the fundamental unit of computation in DHIR, analogous to functions in
 ## Schedule
 Just like the main function. 
 
+## `system_config.json`
+Helps in defining the distributed system that you have. 
+
 
