@@ -32,6 +32,9 @@ Tasks are the fundamental unit of computation in DHIR, analogous to functions in
 Just like the main function. 
 
 ## `system_config.json`
-Helps in defining the distributed system that you have. 
+Helps in defining the distributed system that you have. As of now we have 
+```
+module attributes {avial.target_devices = [#dlti.target_device_spec<"type" = "node", "arch" = "x86_64", "cost" = 1.000000e+00 : f32, "node_id" = "node0", "gpu_count" = 0 : i32>, #dlti.target_device_spec<"type" = "node", "arch" = "x86_64", "cost" = 1.000000e+00 : f32, "node_id" = "node1", "gpu_count" = 0 : i32>, #dlti.target_device_spec<"type" = "node", "arch" = "x86_64", "cost" = 5.000000e-01 : f32, "node_id" = "node2", "gpu_count" = 1 : i32>]}
+```
 
 
