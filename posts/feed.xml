@@ -40,7 +40,9 @@
 &lt;p&gt;Just like the main function.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;system-config-json&quot;&gt;&lt;code&gt;system_config.json&lt;&#x2F;code&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#system-config-json&quot; aria-label=&quot;Anchor link for: system-config-json&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
 &lt;&#x2F;h2&gt;
-&lt;p&gt;Helps in defining the distributed system that you have.&lt;&#x2F;p&gt;
+&lt;p&gt;Helps in defining the distributed system that you have. As of now we have&lt;&#x2F;p&gt;
+&lt;pre class=&quot;z-code&quot;&gt;&lt;code&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;module attributes {avial.target_devices = [#dlti.target_device_spec&amp;lt;&amp;quot;type&amp;quot; = &amp;quot;node&amp;quot;, &amp;quot;arch&amp;quot; = &amp;quot;x86_64&amp;quot;, &amp;quot;cost&amp;quot; = 1.000000e+00 : f32, &amp;quot;node_id&amp;quot; = &amp;quot;node0&amp;quot;, &amp;quot;gpu_count&amp;quot; = 0 : i32&amp;gt;, #dlti.target_device_spec&amp;lt;&amp;quot;type&amp;quot; = &amp;quot;node&amp;quot;, &amp;quot;arch&amp;quot; = &amp;quot;x86_64&amp;quot;, &amp;quot;cost&amp;quot; = 1.000000e+00 : f32, &amp;quot;node_id&amp;quot; = &amp;quot;node1&amp;quot;, &amp;quot;gpu_count&amp;quot; = 0 : i32&amp;gt;, #dlti.target_device_spec&amp;lt;&amp;quot;type&amp;quot; = &amp;quot;node&amp;quot;, &amp;quot;arch&amp;quot; = &amp;quot;x86_64&amp;quot;, &amp;quot;cost&amp;quot; = 5.000000e-01 : f32, &amp;quot;node_id&amp;quot; = &amp;quot;node2&amp;quot;, &amp;quot;gpu_count&amp;quot; = 1 : i32&amp;gt;]}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 </content>
 	</entry>
 	<entry xml:lang="en">
