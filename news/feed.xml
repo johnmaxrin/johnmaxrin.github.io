@@ -7,6 +7,18 @@
 	<updated>2025-10-23T00:00:00+00:00</updated>
 	<id>https://johnmaxrin.github.io/news/feed.xml</id>
 	<entry xml:lang="en">
+		<title>HiPC 2025 Paper Accepted</title>
+		<published>2025-10-23T00:00:00+00:00</published>
+		<updated>2025-10-23T00:00:00+00:00</updated>
+		<link href="https://johnmaxrin.github.io/news/hipc-news/" type="text/html"/>
+		<id>https://johnmaxrin.github.io/news/hipc-news/</id>
+		<content type="html">&lt;p&gt;Our paper &lt;strong&gt;&lt;em&gt;Scalable XML Parsing and XPath Querying with Regular Expression Support&lt;&#x2F;em&gt;&lt;&#x2F;strong&gt; has been &lt;strong&gt;accepted to HiPC 2025&lt;&#x2F;strong&gt; 🎉&lt;&#x2F;p&gt;
+&lt;p&gt;The work is also &lt;strong&gt;nominated for the &lt;em&gt;Distinguished Paper Award&lt;&#x2F;em&gt;&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;🔗 &lt;strong&gt;Paper:&lt;&#x2F;strong&gt; &lt;em&gt;[link coming soon]&lt;&#x2F;em&gt;&lt;br &#x2F;&gt;
+🔗 &lt;strong&gt;Conference:&lt;&#x2F;strong&gt; &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;hipc.org&#x2F;&quot;&gt;https:&#x2F;&#x2F;hipc.org&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
 		<title>MLIR Primer: Guest Lecture at IIT Madras</title>
 		<published>2025-10-23T00:00:00+00:00</published>
 		<updated>2025-10-23T00:00:00+00:00</updated>
