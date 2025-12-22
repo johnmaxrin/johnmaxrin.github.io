@@ -4,8 +4,48 @@
 	<subtitle>My blog site.</subtitle>
 	<link href="https://johnmaxrin.github.io/posts/feed.xml" rel="self" type="application/atom+xml"/>
     <link href="https://johnmaxrin.github.io/posts/"/>
-	<updated>2025-11-03T00:00:00+00:00</updated>
+	<updated>2025-12-22T00:00:00+00:00</updated>
 	<id>https://johnmaxrin.github.io/posts/feed.xml</id>
+	<entry xml:lang="en">
+		<title>My First Conference Experience at HiPC</title>
+		<published>2025-12-22T00:00:00+00:00</published>
+		<updated>2025-12-22T00:00:00+00:00</updated>
+		<link href="https://johnmaxrin.github.io/posts/hipc-experience/" type="text/html"/>
+		<id>https://johnmaxrin.github.io/posts/hipc-experience/</id>
+		<content type="html">&lt;p&gt;Attending my first academic conference was a milestone moment for me, both professionally and personally. I had the opportunity to attend HiPC 25, which took place at the The Westin Hyderabad Mindspace from December 17 to December 20.
+&lt;img src=&quot;&#x2F;img&#x2F;hipc_3.jpg&quot; alt=&quot;HiPC Conference at Westin Hyderabad&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;From the very first day, the experience felt energizing. I met people from all over the world, each bringing their own background, research interests, and perspectives. Conversations flowed easily, from deep technical discussions to casual chats about universities, advisors, and life as a researcher. Being in an environment where everyone shared at least one common thread made networking feel natural rather than forced.&lt;&#x2F;p&gt;
+&lt;p&gt;Outside the conference halls, I also got the chance to roam around Hyderabad, completely carefree. I visited several places across the city, explored the local culture, and met many people along the way. The balance between academic intensity and personal exploration made the experience even more memorable.
+&lt;img src=&quot;&#x2F;img&#x2F;hipc_2.jpeg&quot; alt=&quot;HiPC Conference at Westin Hyderabad&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;expectations-vs-reality&quot;&gt;Expectations vs Reality&lt;a class=&quot;zola-anchor&quot; href=&quot;#expectations-vs-reality&quot; aria-label=&quot;Anchor link for: expectations-vs-reality&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;Before attending, I carried a few assumptions about conferences.&lt;&#x2F;p&gt;
+&lt;p&gt;I expected conferences to be boring. In reality, it was far from that. If you wanted, you could attend technical sessions all day. If not, you could simply talk to people. Everyone at the conference shared something in common, whether it was their research area, their alma mater, or similar academic journeys.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;hipc_alma.jpeg&quot; alt=&quot;HiPC Conference at Westin Hyderabad&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;I also assumed people would be rude, unapproachable, or pretend to know everything. The reality was the exact opposite. Almost everyone I interacted with was humble, welcoming, and genuinely open to exchanging ideas and feedback.&lt;&#x2F;p&gt;
+&lt;p&gt;Even small things surprised me. I thought the food would be bad, but it turned out to be excellent. The climate was pleasant too, which made moving around the city and the venue comfortable throughout the event.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;first-presentation-experience&quot;&gt;First Presentation Experience&lt;a class=&quot;zola-anchor&quot; href=&quot;#first-presentation-experience&quot; aria-label=&quot;Anchor link for: first-presentation-experience&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;One of the most defining moments of the conference was my presentation. This was the first time I presented my work to a wider audience.
+&lt;img src=&quot;&#x2F;img&#x2F;hipc_4.jpg&quot; alt=&quot;HiPC Conference at Westin Hyderabad&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Condensing months or even years of work into a 15 minute presentation is challenging. Choosing the right words at the right moment matters a lot in such time constrained situations. I relied heavily on presenter notes, along with my own explanations throughout the talk, to stay on track.&lt;&#x2F;p&gt;
+&lt;p&gt;Rupesh often says that the real way to judge a talk is by the number of hands raised afterward. By that measure, I walked away very happy. After the presentation, several people approached me to discuss the paper further. Those interactions were deeply validating.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;lessons-learned&quot;&gt;Lessons Learned&lt;a class=&quot;zola-anchor&quot; href=&quot;#lessons-learned&quot; aria-label=&quot;Anchor link for: lessons-learned&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;This first conference taught me several practical lessons that I will carry forward.&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Pack as little as possible. Traveling light makes it much easier to move around and stay flexible.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;For short presentations, presenter notes are extremely helpful. They act as a safety net without breaking the flow of the talk.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Most importantly, talk to as many people as you can. It costs nothing, and the conversations you have can be far more valuable than you expect.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>Distributed Heterogeneous IR</title>
 		<published>2025-11-03T00:00:00+00:00</published>
