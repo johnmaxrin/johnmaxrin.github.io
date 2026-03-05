@@ -1,4 +1,4 @@
-name: github pages
+name: github-pages
 
 on:
 push:
@@ -10,7 +10,8 @@ deploy:
 runs-on: ubuntu-latest
 
 steps:
-  - uses: actions/checkout@v4
+  - name: Checkout repository
+    uses: actions/checkout@v4
     with:
       submodules: true
 
@@ -24,8 +25,9 @@ steps:
   - name: Build site
     run: zola build
 
-  - name: Deploy
+  - name: Deploy to GitHub Pages
     uses: peaceiris/actions-gh-pages@v4
     with:
       github_token: ${{ secrets.GITHUB_TOKEN }}
       publish_dir: ./public
+
