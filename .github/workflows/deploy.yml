@@ -19,6 +19,7 @@ jobs:
           tar -xzf zola.tar.gz
           sudo mv zola /usr/local/bin/zola 
           zola --version
+          zola build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
