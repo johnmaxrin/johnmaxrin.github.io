@@ -9,7 +9,6 @@ jobs:
 deploy:
 runs-on: ubuntu-latest
 
-```
 steps:
   - uses: actions/checkout@v4
     with:
@@ -30,4 +29,3 @@ steps:
     with:
       github_token: ${{ secrets.GITHUB_TOKEN }}
       publish_dir: ./public
-```
