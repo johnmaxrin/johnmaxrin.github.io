@@ -3,7 +3,7 @@ type = "card_simple"
 title = "IIT Madras"
 icon = "/img/iitmlogo.svg"
 link = "https://www.iitm.ac.in/"
-content = "Masters in Computer Science"
+content = "Masters in Computer Science & Engineering"
 date = "2024 - Present"
 
 [[collection]]
