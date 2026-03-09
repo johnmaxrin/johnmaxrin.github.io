@@ -14,8 +14,6 @@ link = "https://events.csa.iisc.ac.in/csworkshop2025/"
 subtitle = "Computer Systems Workshop 2025"
 content = "This work introduces DHIR, an MLIR-based intermediate representation designed to unify distributed and heterogeneous execution. DHIR enables task parallelism, device placement, and communication within a single abstraction, improving programmability and compiler optimization across CPUs, GPUs, and clusters."
 
-
-
 [[collection]]
 type = "art"
 img = "/img/pldi_src.png"
