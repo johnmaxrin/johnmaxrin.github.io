@@ -28,4 +28,11 @@ link = "https://iisc.wordpress.com"
 title = "Life of a student researcher"
 subtitle = "bhOndOO"
 
+[[collection]]
+type = "entry"
+icon = "https://pages.cs.wisc.edu/~remzi/OSTEP/book-cover-two.jpg"
+link = "https://pages.cs.wisc.edu/~remzi/OSTEP/"
+title = "Operating Systems: Three Easy Pieces"
+subtitle = "Arpaci-Dusseaus"
+
 
