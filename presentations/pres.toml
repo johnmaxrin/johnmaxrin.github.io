@@ -2,7 +2,7 @@
 type = "art"
 img = "/img/ms_seminar.png"
 title = "Task-Based MLIR Compilation for HPC Clusters"
-link = "https://www.canva.com/design/DAHBFupIqcY/AFn6wUVn0x6LTpnfSxaVeg/edit?utm_content=DAHBFupIqcY&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
+link = "/pdfs/ms_seminar.pdf"
 subtitle = "MS Seminar"
 content = "This seminar presents a compiler framework for distributed heterogeneous HPC systems built using MLIR. The work explores task-based decomposition of workloads and compilation strategies that map computations efficiently across CPUs and GPUs in cluster environments. It discusses the design of intermediate representations, scheduling strategies, and runtime integration for scalable execution on multi-node systems."
 
