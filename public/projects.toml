@@ -1,0 +1,33 @@
+[[collection]]
+type = "card"
+icon = "/img/language.png"
+title = "StarPlat MLIR"
+subtitle = "DSL Compiler with MLIR Stack"
+date = "2025 Jan - Present"
+content = """\
+Redesigned and implemented the entire compiler infrastructure for the Starplat domain-specific language (DSL) 
+using the MLIR (Multi-Level Intermediate Representation) framework. Developed a custom MLIR dialect tailored to 
+the semantics of the Starplat DSL, enabling progressive lowering through MLIR levels down to LLVM IR for efficient code
+ generation. This approach enhanced modularity, extensibility, and performance optimization opportunities in the compilation pipeline.
+
+"""
+
+[[collection]]
+type = "card"
+icon = "/img/semiconductor.png"
+title = "AF754"
+subtitle = "IEEE 754-Compliant Activation Functions for Hardware"
+date = "2021-2025"
+content = """\
+Developed a suite of high-performance activation functions implemented in Bluespec, designed for seamless integration into hardware accelerators. The library ensures full compliance with the IEEE 754 floating-point standard, making it suitable for precision-critical machine learning and signal processing applications.
+"""
+
+[[collection]]
+type = "card"
+icon = "/img/gear.png"
+title = "AutoRegex"
+subtitle = "DFA-Based Regular Expression Engine"
+date = "Sep 2023 - Oct 2023"
+content = """\
+Designed and implemented a custom regular expression engine that converts regex patterns into deterministic finite automata (DFA) for efficient pattern matching. The conversion algorithm is based on the foundational techniques presented in the "Dragon Book" (Compilers: Principles, Techniques, and Tools by Aho, Lam, Sethi, and Ullman).
+"""

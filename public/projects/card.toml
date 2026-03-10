@@ -1,0 +1,21 @@
+[[collection]]
+type = "card"
+title = "The Hobbit"
+subtitle = "J.R.R. Tolkien"
+date = "1937"
+link = "https://example.com/the-hobbit"
+icon = "/img/hobbit-cover.jpg"
+content = "A fantasy novel about Bilbo Baggins' unexpected journey."
+tags = ["Fantasy", "Adventure"]
+img = "https://images.unsplash.com/photo-1728044849533-7ebd39199597?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+
+[[collection]]
+type = "card"
+title = "Dune"
+subtitle = "Frank Herbert"
+date = "1965"
+link = "https://example.com/dune"
+icon = "/img/dune-cover.jpg"
+content = "A sci-fi epic about politics, ecology, and a desert planet."
+tags = ["Science Fiction", "Classic"]
+img = "https://images.unsplash.com/photo-1742218410149-2636c3474e15?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzfHx8ZW58MHx8fHx8"
