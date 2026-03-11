@@ -36,3 +36,12 @@ title = "Operating Systems: Three Easy Pieces"
 subtitle = "Arpaci-Dusseaus"
 
 
+[[collection]]
+type = "entry"
+icon = "https://os.phil-opp.com/favicon.ico"
+link = "https://os.phil-opp.com/"
+title = "Writing an OS in Rust"
+subtitle = "Arpaci-Dusseaus"
+
+
+
