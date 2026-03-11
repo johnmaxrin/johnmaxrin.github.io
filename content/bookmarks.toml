@@ -32,7 +32,7 @@ subtitle = "bhOndOO"
 type = "entry"
 icon = "https://pages.cs.wisc.edu/~remzi/OSTEP/book-cover-two.jpg"
 link = "https://pages.cs.wisc.edu/~remzi/OSTEP/"
-title = "Operating Systems: Three Easy Pieces"
+title = "OS: Three Easy Pieces"
 subtitle = "Arpaci-Dusseaus"
 
 
@@ -41,7 +41,7 @@ type = "entry"
 icon = "https://os.phil-opp.com/favicon.ico"
 link = "https://os.phil-opp.com/"
 title = "Writing an OS in Rust"
-subtitle = "Arpaci-Dusseaus"
+subtitle = "Oppermann"
 
 
 
