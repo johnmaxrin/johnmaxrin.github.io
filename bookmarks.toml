@@ -43,5 +43,12 @@ link = "https://os.phil-opp.com/"
 title = "Writing an OS in Rust"
 subtitle = "Oppermann"
 
+[[collection]]
+type = "entry"
+icon = "/icon/book.png"
+link = "/pdfs/hackers_delight.pdf"
+title = "Hacker's Delight "
+subtitle = "Warren"
+
 
 
