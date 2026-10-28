@@ -1,10 +1,18 @@
 [[collection]]
 type = "card_simple"
+title = "UCSD"
+icon = "/img/ucsd_logo.svg"
+link = "https://www.ucsd.edu/"
+content = "PhD in Computer Science & Engineering"
+date = "2026 - Present"
+
+[[collection]]
+type = "card_simple"
 title = "IIT Madras"
 icon = "/img/iitmlogo.svg"
 link = "https://www.iitm.ac.in/"
 content = "Masters in Computer Science & Engineering"
-date = "2024 - Present"
+date = "2026"
 
 [[collection]]
 type = "card_simple"
