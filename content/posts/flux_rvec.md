@@ -365,6 +365,6 @@ Here's a map of what's inside:
 - **Section 4: Algorithmic Verification.** How the Rust compiler plugin turns all this into constraints and infers refinements, so you don't have to write loop invariants.
 - **Section 5: Evaluation.** Flux versus Prusti, a program-logic verifier for Rust. Flux cut specification size by about half and verification time by an order of magnitude. For example, `fft` took Flux about 0.7 seconds and Prusti about 167. The paper is also upfront about the trade-off: Prusti can express deeper properties, like sortedness, that Flux can't.
 
-The source code is on GitHub at [flux-rs/flux](https://github.com/flux-rs/flux).
+[Gist](https://gist.github.com/johnmaxrin/c4fc721044cd1dbb9638b5c106edc7b5) of the source code of this blog.
 
 Happy verifying!
