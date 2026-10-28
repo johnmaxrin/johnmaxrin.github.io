@@ -12,7 +12,7 @@
 		<updated>2026-10-27T00:00:00+00:00</updated>
 		<link href="https://johnmaxrin.github.io/posts/flux-rvec/" type="text/html"/>
 		<id>https://johnmaxrin.github.io/posts/flux-rvec/</id>
-		<content type="html">&lt;h1 id=&quot;teaching-rust-not-to-panic-a-refined-vector-with-flux&quot;&gt;Teaching Rust Not to Panic: A Refined Vector with Flux&lt;a class=&quot;zola-anchor&quot; href=&quot;#teaching-rust-not-to-panic-a-refined-vector-with-flux&quot; aria-label=&quot;Anchor link for: teaching-rust-not-to-panic-a-refined-vector-with-flux&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+		<content type="html">&lt;h1 id=&quot;a-refined-vector-with-flux&quot;&gt;A Refined Vector with Flux&lt;a class=&quot;zola-anchor&quot; href=&quot;#a-refined-vector-with-flux&quot; aria-label=&quot;Anchor link for: a-refined-vector-with-flux&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
 &lt;&#x2F;h1&gt;
 &lt;p&gt;We&#x27;ve all been there. You write &lt;code&gt;v[i]&lt;&#x2F;code&gt;, it compiles, you run it, and boom: index out of bounds. Rust&#x27;s borrow checker is great, but it doesn&#x27;t know how long your vector is.&lt;&#x2F;p&gt;
 &lt;p&gt;What if it did?&lt;&#x2F;p&gt;
