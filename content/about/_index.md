@@ -8,7 +8,7 @@ insert_anchor_links = "none"
 lang = 'en'
 
 title = "About"
-subtitle = "Manjali · Thuvayoor · Manakala · Adoor · Elthuruth · Patturaikkal · Eastfort · Koovapally · Adyar · Taramani"
+subtitle = "Manjali · Thuvayoor · Manakala · Adoor · Elthuruth · Patturaikkal · Eastfort · Koovapally · Adyar · Taramani · La Jolla"
 
 math = false
 mermaid = false
