@@ -6,7 +6,7 @@ draft = false
 template = "post.html"
 +++
 
-# Teaching Rust Not to Panic: A Refined Vector with Flux
+# A Refined Vector with Flux
 
 We've all been there. You write `v[i]`, it compiles, you run it, and boom: index out of bounds. Rust's borrow checker is great, but it doesn't know how long your vector is.
 
